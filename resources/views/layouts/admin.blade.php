@@ -23,13 +23,9 @@
 
   </head>
   <body>
-    <div class="blog-masthead">
-       <div class="container">
-         <nav class="blog-nav">
-            @include('layouts._includes._navbar_blog');
-         </nav>
-       </div>
-     </div>
+  <!--Barra de navegação -->
+  @include('layouts._includes._navbar_admin');
+
 
 	<div class="container">
 		<div class="blog-header">
