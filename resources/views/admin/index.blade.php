@@ -30,13 +30,13 @@
                             <td>{{ $post->titulo }}</td>
                             <td>{{$post->dataFantasia}}</td>
                             <td>
-                                <a href="{{ route('post.alterar', $post->id)}}" class="btn btn-primary">Alterar</a>
+                                <a href="#" class="btn btn-primary">Alterar</a>
                             </td>
                             <td>
-                                <a href="{{ route('post.remover', $post->id)}}" class="btn btn-danger" onclick="return confirm('Deseja realmente excluir o registro?')">Excluir</a>
+                                <a href="#" class="btn btn-danger" onclick="return confirm('Deseja realmente excluir o registro?')">Excluir</a>
                             </td>
                             <td>
-                                <a href="{{ route('post.imagens', $post->id)}}" class="btn btn-info">Imagens</a>
+                                <a href="#" class="btn btn-info">Imagens</a>
                             </td>
                         </tr>
                     @endforeach

@@ -10,14 +10,9 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-/*
-Route::get('/', function () {
-    return view('welcome');
-});*/
 
-Auth::routes();
 
-//Route::get('/home', 'HomeController@index');
+
 
 /*
 | Blog
@@ -39,3 +34,11 @@ Route::get('/contato', ['uses' => 'ContatoController@mostrarForm', 'as' =>
 //Envia o email de contato
 Route::post('/contato/enviaremail', ['uses' => 'ContatoController@enviarEmail',
                                                 'as' => 'contato.enviaremail']);
+
+/*
+| Painel do Administrador
+*/
+Auth::routes();
+
+//Index do Admin
+Route::get('/admin/index', ['uses' => 'AdminController@index', 'as' => 'admin.index']);
