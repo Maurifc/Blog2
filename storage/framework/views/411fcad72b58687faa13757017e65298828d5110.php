@@ -10,10 +10,10 @@
 
 
                         <div class="form-group<?php echo e($errors->has('email') ? ' has-error' : ''); ?>">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+                            <label for="email" class="col-md-4 control-label">Usuario</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="<?php echo e(old('email')); ?>" required autofocus>
+                                <input id="name" type="text" class="form-control" name="name" value="<?php echo e(old('email')); ?>" required autofocus>
 
                                 <?php if($errors->has('email')): ?>
                                     <span class="help-block">
