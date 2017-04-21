@@ -15,7 +15,7 @@
 							<h2 class="blog-post-title">{{$post->titulo}}</h2>
 						</a>
 						<p class="blog-post-meta">{{$post->dataFantasia}} por
-												{{$post->usuario->nome}}. Categoria:
+												{{$post->usuario->name}}. Categoria:
 															<strong>{{$post->categoria->titulo}}</strong></p>
 
 						@if(count($post->imagemDestaque) === 1)

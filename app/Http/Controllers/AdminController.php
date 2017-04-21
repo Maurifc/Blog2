@@ -13,7 +13,7 @@ class AdminController extends Controller
   //Somente usuários autenticados podem usar funções desse controller
   public function __construct()
   {
-      $this->middleware('auth');
+    $this->middleware('auth');
   }
 
   //Página inicial do painel admin
@@ -36,34 +36,35 @@ class AdminController extends Controller
 
   //Salvar um post no banco de dados
   public function salvarPost(PostRequest $request){
-    //$data = DB::raw("STR_TO_DATE('".$request->input('dataFantasia')."', '%d/%m/%Y %h:%i'");
-    $data = new \DateTime($request->input('dataFantasia'));
-    //$data = DateTime::createFromFormat('m-d-Y', '10-16-2003')->format('Y-m-d');
+    try{
+      $data = \DateTime::createFromFormat("d/m/Y H:i", $request->input('dataFantasia'));
 
-    //Cria o objeto Post
-    $post = new Post;
-    $post->titulo = $request->input('titulo');
-    $post->texto = $request->input('texto');
-    $post->dataFantasia = $data->format('Y-m-d H:i:s');
-    $post->bloqueado = $request->input('bloqueado');
-    $post->categoria_id = $request->input('categoria');
-    $post->usuario_id = \Auth::user()->id;
+      //Cria o objeto Post
+      $post = new Post;
+      $post->titulo = $request->input('titulo');
+      $post->texto = $request->input('texto');
+      $post->dataFantasia = $data->format('Y-m-d H:i:s');
+      $post->bloqueado = $request->input('bloqueado');
+      $post->categoria_id = $request->input('categoria');
+      $post->usuario_id = \Auth::user()->id;
 
-    if($post->save()){
+      //Salvar no banco de dados
+      $post->save();
+
+      //Mensagem de sucesso
       \Session::flash('flash_message', [
         'msg' => "Post cadastrado com sucesso!",
         'class' => "alert-success"
       ]);
 
-      return redirect()->route('admin.index');
-    } else {
+    } catch(\Exception $e){
       \Session::flash('flash_message', [
         'msg' => "Erro ao cadastrar o post",
         'class' => "alert-danger"
       ]);
+    } finally {
+      return redirect()->route('admin.cadastrar.post');
     }
-
-    return redirect()->route('admin.cadastrar.post');
   }
 
   //View para alteração de um post

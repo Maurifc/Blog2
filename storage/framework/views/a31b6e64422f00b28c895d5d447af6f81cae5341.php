@@ -5,7 +5,7 @@
 
             <div class="blog-post">
                 <h2 class="blog-post-title"><?php echo e($post->titulo); ?></h2>
-                <p class="blog-post-meta"><?php echo e($post->dataFantasia); ?> por <?php echo e($post->usuario->nome); ?>. Categoria: <strong><?php echo e($post->categoria->titulo); ?></strong></p>
+                <p class="blog-post-meta"><?php echo e($post->dataFantasia); ?> por <?php echo e($post->usuario->name); ?>. Categoria: <strong><?php echo e($post->categoria->titulo); ?></strong></p>
 
                 <?php if(count($post->imagemDestaque) === 1): ?>
                     <p><img src="<?php echo e(url($post->imagemDestaque[0]->caminhoArquivo)); ?>" width="80%" height="30%"/></p>

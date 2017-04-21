@@ -38,6 +38,14 @@
 		</div>
 	</div>
 
+  <?php if(count($errors)): ?>
+      <ul>
+          <?php $__currentLoopData = $errors; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+              <li><?php echo $error; ?></li>
+          <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+      </ul>
+  <?php endif; ?>
+
   <?php echo $__env->yieldContent('content'); ?>
 
 	 <div class="blog-footer">

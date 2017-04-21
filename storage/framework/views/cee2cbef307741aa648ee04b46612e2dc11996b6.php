@@ -15,7 +15,7 @@
 							<h2 class="blog-post-title"><?php echo e($post->titulo); ?></h2>
 						</a>
 						<p class="blog-post-meta"><?php echo e($post->dataFantasia); ?> por
-												<?php echo e($post->usuario->nome); ?>. Categoria:
+												<?php echo e($post->usuario->name); ?>. Categoria:
 															<strong><?php echo e($post->categoria->titulo); ?></strong></p>
 
 						<?php if(count($post->imagemDestaque) === 1): ?>

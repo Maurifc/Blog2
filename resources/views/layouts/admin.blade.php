@@ -26,13 +26,24 @@
   <!--Barra de navegação -->
   @include('layouts._includes._navbar_admin');
 
-
 	<div class="container">
 		<div class="blog-header">
 			<h1 class="blog-title">{{ config('app.name') }}</h1>
 			<p class="lead blog-description">Remake do Blog do curso de PHP da DevMedia</p>
 		</div>
 	</div>
+
+  @if(Session::has('flash_message'))
+  	<div class="container">
+  		<div class="row">
+  			<div class="col-xs-10 col-xs-offset-1">
+  				<div class="alert {{ Session::get('flash_message')['class'] }}">
+  					<p class="text-center">{{ Session::get('flash_message')['msg']}}</p>
+  				</div>
+  			</div>
+  		</div>
+  	</div>
+  @endif
 
   @yield('content')
 

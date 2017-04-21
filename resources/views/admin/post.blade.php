@@ -6,7 +6,7 @@
 		<div class="row">
 			<div class="col-xs-12">
 				<div class="alert alert-info">
-					Post criado em {{ $post->dataFantasia }} por {{ $post->usuario->nome }}.
+					Post criado em {{ $post->dataFantasia }} por {{ $post->usuario->name }}.
 				</div>
 			</div>
 		</div>
