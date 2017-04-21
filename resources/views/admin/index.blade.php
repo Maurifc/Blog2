@@ -11,7 +11,7 @@
                 </div>
             @endif
 
-            <a href="#" class="btn btn-primary btn-large">Cadastrar novo post</a>
+            <a href="{{route('admin.cadastrar.post')}}" class="btn btn-primary btn-large">Cadastrar novo post</a>
 
             <table class="table table-striped table-bordered table-hover marginTop">
                 <thead>
