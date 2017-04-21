@@ -8,8 +8,9 @@ use App\Post;
 class AdminController extends Controller
 {
   //Somente usuários autenticados podem usar funções desse controller
-  public function __contructor(){
-    $this->middleware('auth');
+  public function __construct()
+  {
+      $this->middleware('auth');
   }
 
   //Página inicial do painel admin

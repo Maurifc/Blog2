@@ -40,5 +40,7 @@ Route::post('/contato/enviaremail', ['uses' => 'ContatoController@enviarEmail',
 */
 Auth::routes();
 
+//logout
+Route::get('/admin/logout', ['uses' => 'Auth\LoginController@logout', 'as' => 'admin.logout']);
 //Index do Admin
-Route::get('/admin/index', ['uses' => 'AdminController@index', 'as' => 'admin.index']);
+Route::get('/admin', ['uses' => 'AdminController@index', 'as' => 'admin.index']);
