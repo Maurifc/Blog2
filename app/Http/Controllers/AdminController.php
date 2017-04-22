@@ -34,6 +34,20 @@ class AdminController extends Controller
     return view('admin.post', compact(['dados', 'categorias']));
   }
 
+  //View para editar um Post
+  public function editarPost($id){
+    $post = Post::find($id);
+
+    $dados = [
+      'rota' => route('admin.atualizar.post', $id),
+      'botaoSubmit' => 'Atualizar'
+    ];
+
+    $categorias = Categoria::orderBy('titulo', 'asc')->get();
+
+    return view('admin.post', compact(['dados', 'categorias', 'post']));
+  }
+
   //Salvar um post no banco de dados
   public function salvarPost(PostRequest $request){
     try{
@@ -67,11 +81,38 @@ class AdminController extends Controller
     }
   }
 
-  //View para alteração de um post
-  public function alterarPost($id){
-    $post = Post::find($id);
+  //Atualizar o post no banco de dados
+  public function atualizarPost(PostRequest $request, $id){
+    try{
+      //Cria um post a partir das requests
+      $post = Post::find($id);
+      $post-> dataFantasia = \DateTime::createFromFormat("d/m/Y H:i", $request->input('dataFantasia'));
+      $post->titulo = $request->input('titulo');
+      $post->texto = $request->input('texto');
+      $post->bloqueado = $request->input('bloqueado');
+      $post->categoria_id = $request->input('categoria');
 
-    return view('admin.editarPost');
+      //Atualiza
+      $post->save();
+
+      //Mostra a mensagem de sucesso
+      \Session::flash('flash_message', [
+        'msg' => 'Post atualizado com sucesso',
+        'class' => 'alert-success'
+      ]);
+
+    } catch (\Exception $e){
+      //Mostra a mensagem de erro
+      \Session::flash('flash_message', [
+        'msg' => 'Falha ao atualizar o Post:'.$e,
+        'class' => 'alert-danger'
+      ]);
+
+      return redirect()->route('admin.alterar.post', $id);
+    }
+
+    //Redireciona para o index do admin
+    return redirect()->route('admin.index');
   }
 
 }

@@ -42,8 +42,14 @@ Route::get('/admin/logout', ['uses' => 'Auth\LoginController@logout', 'as' => 'a
 //Index do Admin
 Route::get('/admin', ['uses' => 'AdminController@index', 'as' => 'admin.index']);
 
-//View de adição de posts
+//View de cadastro de posts
 Route::get('/admin/cadastrar/post', 'AdminController@cadastrarPost')->name('admin.cadastrar.post');
+
+//View para edição de post
+Route::get('/admin/alterar/post/{id}', 'AdminController@editarPost')->name('admin.alterar.post');
 
 //Salvar o post no banco de dados
 Route::post('admin/salvar/post', 'AdminController@salvarPost')->name('admin.salvar.post');
+
+//Atualizar um post no banco de dados
+Route::post('admin/atualizar/post/{id}', 'AdminController@atualizarPost')->name('admin.atualizar.post');

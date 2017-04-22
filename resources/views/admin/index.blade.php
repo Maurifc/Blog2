@@ -30,7 +30,7 @@
                             <td>{{ $post->titulo }}</td>
                             <td>{{$post->dataFantasia}}</td>
                             <td>
-                                <a href="#" class="btn btn-primary">Alterar</a>
+                                <a href="{{ route('admin.alterar.post', $post->id) }}" class="btn btn-primary">Alterar</a>
                             </td>
                             <td>
                                 <a href="#" class="btn btn-danger" onclick="return confirm('Deseja realmente excluir o registro?')">Excluir</a>

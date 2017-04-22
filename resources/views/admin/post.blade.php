@@ -69,10 +69,10 @@
 			</div>
 			<div class="col-xs-10">
 				<label>
-					<input type="radio" name="bloqueado" value="1" {{ (isset($post) && $post->bloqueado) ? 'checked' : ''}}> Sim
+					<input type="radio" name="bloqueado" value="1" {{ (isset($post) && $post->bloqueado === 1) ? 'checked' : ''}}> Sim
 				</label>
 				<label>
-					<input type="radio" name="bloqueado" value="0" {{ !isset($post) ? 'checked' : ''}}> Não
+					<input type="radio" name="bloqueado" value="0" {{ (!isset($post) || (isset($post) && $post->bloqueado === 0)) ? 'checked' : ''}}> Não
 				</label>
 			</div>
 		</div>
