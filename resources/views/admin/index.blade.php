@@ -30,7 +30,7 @@
                                     window.location.href='{{ route('admin.deletar.post', $post->id) }}': void(0)" class="btn btn-danger">Excluir</a>
                             </td>
                             <td>
-                                <a href="#" class="btn btn-info">Imagens</a>
+                                <a href="{{ route('admin.post.imagens', $post->id) }}" class="btn btn-primary">Imagens</a>
                             </td>
                         </tr>
                     @endforeach

@@ -20,7 +20,7 @@
 
 						@if(count($post->imagemDestaque) === 1)
 							<a href="{{ $postLink }}">
-								<p><img src="{{ url($post->imagemDestaque[0]->caminhoArquivo) }}"
+								<p><img src="{{ url($post->imagemDestaque[0]->url()) }}"
 										 															width="80%" height="30%"/></p>
 							</a>
 				    @endif

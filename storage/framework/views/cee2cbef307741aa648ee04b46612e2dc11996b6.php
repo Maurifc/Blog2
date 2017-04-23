@@ -20,7 +20,7 @@
 
 						<?php if(count($post->imagemDestaque) === 1): ?>
 							<a href="<?php echo e($postLink); ?>">
-								<p><img src="<?php echo e(url($post->imagemDestaque[0]->caminhoArquivo)); ?>"
+								<p><img src="<?php echo e(url($post->imagemDestaque[0]->url())); ?>"
 										 															width="80%" height="30%"/></p>
 							</a>
 				    <?php endif; ?>

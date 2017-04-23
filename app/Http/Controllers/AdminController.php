@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\PostRequest;
+use App\Libs\Alert;
 use App\Post;
 use App\User;
 use App\Categoria;
@@ -139,6 +140,18 @@ class AdminController extends Controller
         'msg' => 'Falha ao deletar o post: '.$post->titulo.$e,
         'class' => 'alert-danger'
       ]);
+    }
+
+    return redirect()->route('admin.index');
+  }
+
+  public function postImagens($id){
+    try{
+      $post = Post::find($id);
+
+      return view('admin.post_img', compact('post'));
+    } catch(\Exception $e) {
+      Alert::danger('Falha ao abrir as imagens do post');
     }
 
     return redirect()->route('admin.index');
