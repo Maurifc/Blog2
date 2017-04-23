@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\PostRequest;
+use App\Http\Requests\ImagemRequest;
 use App\Libs\Alert;
 use App\Post;
 use App\User;
 use App\Categoria;
+use App\Imagem;
 
 class AdminController extends Controller
 {
@@ -155,5 +157,63 @@ class AdminController extends Controller
     }
 
     return redirect()->route('admin.index');
+  }
+
+  //View para alterar dados de uma determinada imagem
+  public function alterarImagem($id){
+    try{
+      $imagem = Imagem::find($id);
+
+      //Dados para o formulário
+      $dados = [
+        'tituloPagina' => 'Alteração de imagem',
+        'rotaForm' => route('admin.atualizar.imagem', $imagem->id),
+        'labelSubmmit' => 'Atualizar'
+      ];
+
+      return view('admin.form_img', compact('imagem', 'dados'));
+    } catch (\Exception $e) {
+      Alert::danger('Falha ao abrir a imagem para alterações');
+    }
+
+    return redirect()->route('admin.post.imagens');
+  }
+  public function cadastrarImagem(ImagemRequest $request, $id){
+    NULL;
+  }
+
+  //Atualiza uma imagem no banco de dados
+  public function atualizarImagem(ImagemRequest $request, $imagemId){
+    try{
+      $imagem = Imagem::find($imagemId);
+      $imagem->update($request->all());
+
+      Alert::success('Imagem atualizada com sucesso!');
+    } catch (\Exception $e) {
+      Alert::danger('Falha ao atualizar a imagem no banco de dados');
+    }
+
+    return redirect()->route('admin.post.imagens', $imagem->post->id);
+  }
+
+  //Remove uma imagem do BD
+  public function removerImagem($id){
+    try{
+      $imagem = Imagem::find($id);
+      //Implementar a remoção dos arquivos do disco
+
+      //Remove do bd
+      $imagem->delete();
+
+      //mensagem de sucesso
+      Alert::success("Imagem ".$imagem->legenda." removida com sucesso");
+
+    } catch (\Exception $e){
+      //mensagem de erro
+      Alert::danger('Erro ao tentar remover a imagem '.$imagem->legenda);
+    }
+
+    //Exibe a lista de imagens do post novamente
+    return redirect()->route('admin.post.imagens', $imagem->post->id);
   }
 }

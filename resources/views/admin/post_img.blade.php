@@ -4,7 +4,7 @@
 <div class="container marginTop">
 	<div class="row">
 		<div class="col-xs-12">
-			<a href="#" class="btn btn-primary btn-large">Cadastrar nova imagem</a>
+			<a href="{{route('admin.cadastrar.imagem', $post->id)}}" class="btn btn-primary btn-large">Cadastrar nova imagem</a>
 
 			<table class="table table-striped table-bordered table-hover marginTop">
 				<thead>
@@ -22,10 +22,11 @@
 						<td><img src="{{$imagem->urlThumb()}}" width="100%" /></td>
 						<td>{{$imagem->legenda}}</td>
 						<td>
-							<a href="#" class="btn btn-primary">Alterar</a>
+							<a href="{{ route('admin.alterar.imagem', $imagem->id)}}" class="btn btn-primary">Alterar</a>
 						</td>
 						<td>
-							<a href="#" class="btn btn-danger" onclick="return confirm('Deseja realmente excluir o registro?')">Excluir</a>
+							<a href="javascript:(confirm('Tem certeza que deseja deletar {{ $imagem->legenda }} ?')) ?
+									window.location.href='{{ route('admin.remover.imagem', $imagem->id) }}': void(0)" class="btn btn-danger">Excluir</a>
 						</td>
 					</tr>
 					@endforeach

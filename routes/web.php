@@ -59,3 +59,15 @@ Route::get('admin/deletar/post/{id}', 'AdminController@deletarPost')->name('admi
 
 //View para gerenciar imagens de um Post
 Route::get('admin/post/imagens/{id}', 'AdminController@postImagens')->name('admin.post.imagens');
+
+//View para editar imagem de um Post
+Route::get('admin/alterar/imagem/{id}', 'AdminController@alterarImagem')->name('admin.alterar.imagem');
+
+//View para cadastrar imagem para um Post
+Route::get('admin/cadastrar/imagem/{id}', 'AdminController@cadastrarImagem')->name('admin.cadastrar.imagem');
+
+//Atualiza as informações de uma imagem no bd
+Route::post('admin/atualizar/imagem/{id}', 'AdminController@atualizarImagem')->name('admin.atualizar.imagem');
+
+//Remove uma imagem do bd
+Route::get('admin/deletar/imagem/{id}', 'AdminController@removerImagem')->name('admin.remover.imagem');
