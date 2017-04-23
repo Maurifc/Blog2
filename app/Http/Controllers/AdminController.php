@@ -115,4 +115,32 @@ class AdminController extends Controller
     return redirect()->route('admin.index');
   }
 
+  public function deletarPost($id){
+    try{
+      //Pega o post
+      $post = Post::find($id);
+
+      //Deleta todas as imagens referente ao Post
+      $post->deletarImagens();
+
+      //Deleta o post do banco de dados
+      $post->delete();
+
+      //Mostra a mensagem de sucesso
+      \Session::flash('flash_message', [
+        'msg' => 'Post deletado com sucesso',
+        'class' => 'alert-success'
+      ]);
+
+    } catch (\Exception $e){
+
+      //Mostra a mensagem de sucesso
+      \Session::flash('flash_message', [
+        'msg' => 'Falha ao deletar o post: '.$post->titulo.$e,
+        'class' => 'alert-danger'
+      ]);
+    }
+
+    return redirect()->route('admin.index');
+  }
 }

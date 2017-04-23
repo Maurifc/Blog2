@@ -25,4 +25,14 @@ class Post extends Model
     public function imagemDestaque(){
         return $this->imagens()->where('imagemDestaque', 1)->take(1);
     }
+
+    public function deletarImagens(){
+      try{
+        foreach($this->imagens as $imagem){
+          $imagem->delete();
+        }
+      } catch (\Exception $e) {
+        throw $e;
+      }
+    }
 }

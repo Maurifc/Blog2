@@ -53,3 +53,6 @@ Route::post('admin/salvar/post', 'AdminController@salvarPost')->name('admin.salv
 
 //Atualizar um post no banco de dados
 Route::post('admin/atualizar/post/{id}', 'AdminController@atualizarPost')->name('admin.atualizar.post');
+
+//Remover um post do banco de dados
+Route::get('admin/deletar/post/{id}', 'AdminController@deletarPost')->name('admin.deletar.post');

@@ -4,13 +4,6 @@
 <div class="container marginTop">
     <div class="row">
         <div class="col-xs-12">
-
-            @if(Session::has('flash_message'))
-                <div class="alert {{ Session::get('flash_message')['class'] }}marginTop">
-                    <strong>{{ Session::get('flash_message')['msg']}}</strong>
-                </div>
-            @endif
-
             <a href="{{route('admin.cadastrar.post')}}" class="btn btn-primary btn-large">Cadastrar novo post</a>
 
             <table class="table table-striped table-bordered table-hover marginTop">
@@ -33,7 +26,8 @@
                                 <a href="{{ route('admin.alterar.post', $post->id) }}" class="btn btn-primary">Alterar</a>
                             </td>
                             <td>
-                                <a href="#" class="btn btn-danger" onclick="return confirm('Deseja realmente excluir o registro?')">Excluir</a>
+                                <a href="javascript:(confirm('Tem certeza que deseja deletar {{ $post->titulo }} ?')) ?
+                                    window.location.href='{{ route('admin.deletar.post', $post->id) }}': void(0)" class="btn btn-danger">Excluir</a>
                             </td>
                             <td>
                                 <a href="#" class="btn btn-info">Imagens</a>
