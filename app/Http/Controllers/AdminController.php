@@ -212,7 +212,10 @@ class AdminController extends Controller
       //$extImagem = $arq->extension();
 
       //Gera um nome randomico para a imagem e a extensão png
-      $nomeImagem = rand( 100000, 999999999).'.png';
+      do{
+        $numeroRandomico = rand( 100000, 999999999);
+      }while(\File::exists(public_path('uploads/imgs/').$numeroRandomico.'.png'));
+      $nomeImagem = $numeroRandomico.'.png';
 
       //Salva na pasta Upload/imgs com a extensão definida acima
       $imagem->save('uploads/imgs/'.$nomeImagem, 80);
@@ -237,7 +240,7 @@ class AdminController extends Controller
       Alert::success('Imagem '.$imagemModel->legeda.' inserida com sucesso!');
 
     } catch (\Exception $e){
-      Alert::danger("Falha ao inserir a imagem: ".$e->getMessage());
+      Alert::danger("Falha ao inserir a imagem.");
     }
 
     //Retorna para a página de upload de imagens
@@ -264,7 +267,9 @@ class AdminController extends Controller
       $imagem = Imagem::find($id);
 
       //Remove a imagem do disco
-      //Storage::delete(''$imagem->caminhoArquivo);
+      \File::delete($imagem->caminho());
+      \File::delete($imagem->caminhoSm());
+      \File::delete($imagem->caminhoMd());
 
       //Remove do bd
       $imagem->delete();
@@ -274,7 +279,7 @@ class AdminController extends Controller
 
     } catch (\Exception $e){
       //mensagem de erro
-      Alert::danger('Erro ao tentar remover a imagem '.$imagem->legenda);
+      Alert::danger('Erro ao tentar remover a imagem '.$imagem->legenda.$e);
     }
 
     //Exibe a lista de imagens do post novamente

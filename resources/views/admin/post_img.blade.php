@@ -19,7 +19,7 @@
 
 					@foreach($post->imagens as $imagem)
 					<tr>
-						<td><img src="{{$imagem->urlThumb()}}" width="100%" /></td>
+						<td><img src="{{$imagem->urlSm()}}" width="100%" /></td>
 						<td>{{$imagem->legenda}}</td>
 						<td>
 							<a href="{{ route('admin.alterar.imagem', $imagem->id)}}" class="btn btn-primary">Alterar</a>
