@@ -24,6 +24,7 @@ class ImagemRequest extends FormRequest
     public function rules()
     {
         return [
+            'imagem' => 'required|image',
             'legenda' => 'required|max:100',
             'imagemDestaque' => 'required'
         ];
@@ -31,6 +32,8 @@ class ImagemRequest extends FormRequest
 
     public function messages(){
       return [
+        'imagem.required' => 'Por favor, selecione uma imagem',
+        'imagem.image' => 'Por favor, selecione uma imagem nos formatos jpeg, png, ou gif',
         'legenda.required' => 'Preencha corretamente o campo',
         'legenda.max' => 'O máximo de caracteres permito é 100',
         'imagemDestaque.required' => 'Defina se a imagem é destaque ou não'

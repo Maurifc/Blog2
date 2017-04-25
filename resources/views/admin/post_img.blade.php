@@ -4,7 +4,7 @@
 <div class="container marginTop">
 	<div class="row">
 		<div class="col-xs-12">
-			<a href="{{route('admin.cadastrar.imagem', $post->id)}}" class="btn btn-primary btn-large">Cadastrar nova imagem</a>
+			<a href="{{route('admin.upload.imagem', $post->id)}}" class="btn btn-primary btn-large">Cadastrar nova imagem</a>
 
 			<table class="table table-striped table-bordered table-hover marginTop">
 				<thead>

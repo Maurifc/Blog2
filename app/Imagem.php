@@ -14,7 +14,11 @@ class Imagem extends Model
     }
 
     public function urlThumb(){
-      return url($this->uploadedImagesPath.'imgs_thumbs/'.$this->caminhoArquivo);
+      return url($this->uploadedImagesPath.'sm/'.$this->caminhoArquivo);
+    }
+
+    public function urlMd(){
+      return url($this->uploadedImagesPath.'md/'.$this->caminhoArquivo);
     }
 
     public function url(){

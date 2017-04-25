@@ -18,7 +18,7 @@
 					<strong>Selecione uma imagem:</strong>
 			</div>
 			<div class="col-xs-9">
-					<input type="file" name="arquivo" required />
+					<input type="file" name="imagem" required/>
 					<input type="hidden" name="MAX_FILE_SIZE" value="1000" />
 			</div>
 		</div>
@@ -29,7 +29,7 @@
 					<strong>Legenda da imagem:</strong>
 			</div>
 			<div class="col-xs-9">
-					<input type="text" name="legenda" class="col-xs-12 form-control" value="{{ isset($imagem) ? $imagem->legenda : ''}}" autofocus />
+					<input type="text" name="legenda" class="col-xs-12 form-control" value="{{ isset($imagem) ? $imagem->legenda : ''}}" required autofocus />
 			</div>
 		</div>
 

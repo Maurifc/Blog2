@@ -15,13 +15,12 @@
           <?php echo e($post->texto); ?>
 
         </div>
-        
+
         <?php if(count($post->imagens) > 0): ?>
           <?php $__currentLoopData = $post->imagens; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $imagem): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
           <a href="<?php echo e(url($imagem->url())); ?>" target="_blank">
-            <img src="<?php echo e(url($imagem->urlThumb())); ?>" width="180px" align="center" style="margin:10px;">
+            <img src="<?php echo e(url($imagem->urlMd())); ?>" width="180px" align="center" style="margin:10px;">
           </a>
-          <p><?php echo e($imagem->legenda); ?></p>
           <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         <?php endif; ?>
       </div><!-- /.blog-post -->

@@ -16,13 +16,12 @@
         <div class="blog-post-text">
           {{ $post->texto }}
         </div>
-        
+
         @if(count($post->imagens) > 0)
           @foreach($post->imagens as $imagem)
           <a href="{{ url($imagem->url()) }}" target="_blank">
-            <img src="{{ url($imagem->urlThumb()) }}" width="180px" align="center" style="margin:10px;">
+            <img src="{{ url($imagem->urlMd()) }}" width="180px" align="center" style="margin:10px;">
           </a>
-          <p>{{ $imagem->legenda }}</p>
           @endforeach
         @endif
       </div><!-- /.blog-post -->

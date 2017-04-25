@@ -64,7 +64,10 @@ Route::get('admin/post/imagens/{id}', 'AdminController@postImagens')->name('admi
 Route::get('admin/alterar/imagem/{id}', 'AdminController@alterarImagem')->name('admin.alterar.imagem');
 
 //View para cadastrar imagem para um Post
-Route::get('admin/cadastrar/imagem/{id}', 'AdminController@cadastrarImagem')->name('admin.cadastrar.imagem');
+Route::get('admin/upload/imagem/{id}', 'AdminController@uploadImagem')->name('admin.upload.imagem');
+
+//Atualiza as informações de uma imagem no bd
+Route::post('admin/salvar/imagem/{id}', 'AdminController@salvarImagem')->name('admin.salvar.imagem');
 
 //Atualiza as informações de uma imagem no bd
 Route::post('admin/atualizar/imagem/{id}', 'AdminController@atualizarImagem')->name('admin.atualizar.imagem');

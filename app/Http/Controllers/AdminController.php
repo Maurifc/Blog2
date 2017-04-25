@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\PostRequest;
 use App\Http\Requests\ImagemRequest;
+use Intervention\Image\ImageManagerStatic as Image;
 use App\Libs\Alert;
 use App\Post;
 use App\User;
@@ -178,8 +179,69 @@ class AdminController extends Controller
 
     return redirect()->route('admin.post.imagens');
   }
-  public function cadastrarImagem(ImagemRequest $request, $id){
-    NULL;
+
+  //Exibe a view para upload de imagem
+  public function uploadImagem($id){
+    try{
+      $post = Post::find($id);
+
+      $dados = [
+        'tituloPagina' => 'Upload de imagem',
+        'rotaForm' => route('admin.salvar.imagem', $id),
+        'labelSubmmit' => 'Enviar'
+      ];
+
+      return view('admin.form_img', compact('dados', 'post'));
+    } catch(\Exception $e){
+      Alert::danger('Falha ao abrir sua solicitação: Upload de imagem');
+    }
+
+    return redirect()->route('admin.post.imagens', $id);
+  }
+
+  //Salva uma imagem no disco e no bd
+  public function salvarImagem(ImagemRequest $request, $postId){
+    try{
+      //Pega o post que a imagem pertence
+      $post = Post::find($postId);
+
+      //Pega a imagem (como objeto do Intervention Image)
+      $imagem = Image::make($request->file('imagem')); ;
+
+      //Pega a extensão da imagem
+      //$extImagem = $arq->extension();
+
+      //Gera um nome randomico para a imagem e a extensão png
+      $nomeImagem = rand( 100000, 999999999).'.png';
+
+      //Salva na pasta Upload/imgs com a extensão definida acima
+      $imagem->save('uploads/imgs/'.$nomeImagem, 80);
+      //$request->photo->storeAs('uploads/imgs', $nomeImagem.'.jpg');
+
+      //Salva a imagem (de tamanho médio) na pasta Upload/imgs/md
+      $imagem->resize(420, 270)->save('uploads/imgs/md/'.$nomeImagem);
+
+      //Salva a imagem (de tamanho pequeno) na pasta Upload/imgs/sm
+      $imagem->crop(66, 66)->save('uploads/imgs/sm/'.$nomeImagem);
+
+      //Monta o model para inserção no banco de dados
+      $imagemModel = new Imagem();
+      $imagemModel->legenda = $request->input('legenda');
+      $imagemModel->imagemDestaque = $request->input('imagemDestaque');
+      $imagemModel->caminhoArquivo = $nomeImagem;
+
+      //insere no banco de dados
+      $post->imagens()->save($imagemModel);
+
+      //mensagem de sucesso
+      Alert::success('Imagem '.$imagemModel->legeda.' inserida com sucesso!');
+
+    } catch (\Exception $e){
+      Alert::danger("Falha ao inserir a imagem: ".$e->getMessage());
+    }
+
+    //Retorna para a página de upload de imagens
+    return redirect()->route('admin.upload.imagem', $post->id);
   }
 
   //Atualiza uma imagem no banco de dados
@@ -200,7 +262,9 @@ class AdminController extends Controller
   public function removerImagem($id){
     try{
       $imagem = Imagem::find($id);
-      //Implementar a remoção dos arquivos do disco
+
+      //Remove a imagem do disco
+      //Storage::delete(''$imagem->caminhoArquivo);
 
       //Remove do bd
       $imagem->delete();
