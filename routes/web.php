@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -34,43 +33,50 @@ Route::post('/contato/enviaremail', ['uses' => 'ContatoController@enviarEmail',
 /*
 | Painel do Administrador
 */
+//Rotas de login
 Auth::routes();
 
-//logout
-Route::get('/admin/logout', ['uses' => 'Auth\LoginController@logout', 'as' => 'admin.logout']);
+//Logout
+Route::get('/admin/logout', 'Auth\LoginController@logout')->name('admin.logout');
 
 //Index do Admin
-Route::get('/admin', ['uses' => 'AdminController@index', 'as' => 'admin.index']);
+Route::get('/admin', 'Admin\PostController@index')->name('admin.index');
 
+/*
+| Posts
+*/
 //View de cadastro de posts
-Route::get('/admin/cadastrar/post', 'AdminController@cadastrarPost')->name('admin.cadastrar.post');
+Route::get('admin/post/cadastrar', 'Admin\PostController@cadastrarPost')->name('admin.cadastrar.post');
 
 //View para edição de post
-Route::get('/admin/alterar/post/{id}', 'AdminController@editarPost')->name('admin.alterar.post');
+Route::get('admin/post/alterar/{id}', 'Admin\PostController@editarPost')->name('admin.alterar.post');
 
 //Salvar o post no banco de dados
-Route::post('admin/salvar/post', 'AdminController@salvarPost')->name('admin.salvar.post');
+Route::post('admin/post/salvar', 'Admin\PostController@salvarPost')->name('admin.salvar.post');
 
 //Atualizar um post no banco de dados
-Route::post('admin/atualizar/post/{id}', 'AdminController@atualizarPost')->name('admin.atualizar.post');
+Route::post('admin/post/atualizar/{id}', 'Admin\PostController@atualizarPost')->name('admin.atualizar.post');
 
 //Remover um post do banco de dados
-Route::get('admin/deletar/post/{id}', 'AdminController@deletarPost')->name('admin.deletar.post');
+Route::get('admin/post/deletar/{id}', 'Admin\PostController@deletarPost')->name('admin.deletar.post');
 
 //View para gerenciar imagens de um Post
-Route::get('admin/post/imagens/{id}', 'AdminController@postImagens')->name('admin.post.imagens');
+Route::get('admin/post/imagens/{id}', 'Admin\PostController@postImagens')->name('admin.post.imagens');
 
+/*
+| Imagens
+*/
 //View para editar imagem de um Post
-Route::get('admin/alterar/imagem/{id}', 'AdminController@alterarImagem')->name('admin.alterar.imagem');
+Route::get('admin/imagem/alterar/{id}', 'Admin\ImagemController@alterarImagem')->name('admin.alterar.imagem');
 
 //View para cadastrar imagem para um Post
-Route::get('admin/upload/imagem/{id}', 'AdminController@uploadImagem')->name('admin.upload.imagem');
+Route::get('admin/imagem/upload/{id}', 'Admin\ImagemController@uploadImagem')->name('admin.upload.imagem');
 
 //Atualiza as informações de uma imagem no bd
-Route::post('admin/salvar/imagem/{id}', 'AdminController@salvarImagem')->name('admin.salvar.imagem');
+Route::post('admin/imagem/salvar/{id}', 'Admin\ImagemController@salvarImagem')->name('admin.salvar.imagem');
 
 //Atualiza as informações de uma imagem no bd
-Route::post('admin/atualizar/imagem/{id}', 'AdminController@atualizarImagem')->name('admin.atualizar.imagem');
+Route::post('admin/imagem/atualizar/{id}', 'Admin\ImagemController@atualizarImagem')->name('admin.atualizar.imagem');
 
 //Remove uma imagem do bd
-Route::get('admin/deletar/imagem/{id}', 'AdminController@removerImagem')->name('admin.remover.imagem');
+Route::get('admin/imagem/remover/{id}', 'Admin\ImagemController@removerImagem')->name('admin.remover.imagem');

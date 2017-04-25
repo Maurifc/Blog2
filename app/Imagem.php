@@ -8,6 +8,7 @@ class Imagem extends Model
 {
   protected $fillable = ['post_id', 'legenda', 'caminhoArquivo', 'imagemDestaque'];
   private $uploadedImagesPath ='/uploads/imgs/';
+  const COLUNA_NOME = 'caminhoArquivo';
 
   public function post(){
     return $this->belongsTo(Post::class);
@@ -36,4 +37,5 @@ class Imagem extends Model
   public function caminho(){
     return public_path().$this->uploadedImagesPath.$this->caminhoArquivo;
   }
+
 }
