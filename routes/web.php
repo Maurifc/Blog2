@@ -80,3 +80,24 @@ Route::post('admin/imagem/atualizar/{id}', 'Admin\ImagemController@atualizarImag
 
 //Remove uma imagem do bd
 Route::get('admin/imagem/remover/{id}', 'Admin\ImagemController@removerImagem')->name('admin.remover.imagem');
+
+/*
+| Categorias
+*/
+//Exibe uma lista de categorias
+Route::get('admin/categoria/listar', 'Admin\CategoriaController@listar')->name('admin.listar.categorias');
+
+//Exibe o form para edição da categoria
+Route::get('admin/categoria/alterar/{id}', 'Admin\CategoriaController@alterarCategoria')->name('admin.alterar.categoria');
+
+//Atualiza as informações de uma categoria no bd
+Route::post('admin/categoria/atualizar/{id}', 'Admin\CategoriaController@atualizarCategoria')->name('admin.atualizar.categoria');
+
+//Exibe o form para cadastro de categoria
+Route::get('admin/categoria/cadastrar', 'Admin\CategoriaController@cadastrar')->name('admin.cadastrar.categoria');
+
+//Salva a categoria no bd
+Route::post('admin/categoria/salvar/', 'Admin\CategoriaController@salvar')->name('admin.salvar.categoria');
+
+//Apaga uma categoria
+Route::get('admin/categoria/deletar/{id}', 'Admin\CategoriaController@deletar')->name('admin.deletar.categoria');

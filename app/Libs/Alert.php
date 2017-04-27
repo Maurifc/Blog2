@@ -15,7 +15,7 @@ class Alert{
   }
 
   public static function danger(String $msg){
-    return self::show($msg, self::ALERT_DANGER);
+    return self::show($msg.': Tente novamente mais tarde.', self::ALERT_DANGER);
   }
 
   private static function show(String $msg, String $class){
