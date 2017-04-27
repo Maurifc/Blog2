@@ -291,11 +291,13 @@ class ComposerStaticInitf5128c302cdf365b7395c69455710683
     );
 
     public static $classMap = array (
+        'AddColunaNomeCompletoUsers' => __DIR__ . '/../..' . '/database/migrations/2017_04_26_213129_add_coluna_nome_completo_users.php',
         'App\\Categoria' => __DIR__ . '/../..' . '/app/Categoria.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
-        'App\\Http\\Controllers\\AdminController' => __DIR__ . '/../..' . '/app/Http/Controllers/AdminController.php',
+        'App\\Http\\Controllers\\Admin\\CategoriaController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/CategoriaController.php',
         'App\\Http\\Controllers\\Admin\\ImagemController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/ImagemController.php',
+        'App\\Http\\Controllers\\Admin\\PostController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/PostController.php',
         'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
         'App\\Http\\Controllers\\Auth\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/LoginController.php',
         'App\\Http\\Controllers\\Auth\\RegisterController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/RegisterController.php',
@@ -309,6 +311,7 @@ class ComposerStaticInitf5128c302cdf365b7395c69455710683
         'App\\Http\\Middleware\\RedirectIfAuthenticated' => __DIR__ . '/../..' . '/app/Http/Middleware/RedirectIfAuthenticated.php',
         'App\\Http\\Middleware\\TrimStrings' => __DIR__ . '/../..' . '/app/Http/Middleware/TrimStrings.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
+        'App\\Http\\Requests\\CategoriaRequest' => __DIR__ . '/../..' . '/app/Http/Requests/CategoriaRequest.php',
         'App\\Http\\Requests\\ContatoRequest' => __DIR__ . '/../..' . '/app/Http/Requests/ContatoRequest.php',
         'App\\Http\\Requests\\ImagemRequest' => __DIR__ . '/../..' . '/app/Http/Requests/ImagemRequest.php',
         'App\\Http\\Requests\\PostRequest' => __DIR__ . '/../..' . '/app/Http/Requests/PostRequest.php',

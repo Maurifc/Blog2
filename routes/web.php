@@ -101,3 +101,24 @@ Route::post('admin/categoria/salvar/', 'Admin\CategoriaController@salvar')->name
 
 //Apaga uma categoria
 Route::get('admin/categoria/deletar/{id}', 'Admin\CategoriaController@deletar')->name('admin.deletar.categoria');
+
+/*
+| Usuários
+*/
+//Exibe uma lista de usuários
+Route::get('admin/usuario/listar', 'Admin\UsuarioController@listar')->name('admin.listar.usuarios');
+
+//Exibe o form para cadastro de usuários
+Route::get('admin/usuario/cadastrar', 'Admin\UsuarioController@cadastrar')->name('admin.cadastrar.usuario');
+
+//Exibe o form para edição do usuário
+Route::get('admin/usuario/alterar/{id}', 'Admin\UsuarioController@alterar')->name('admin.alterar.usuario');
+
+//Exibe o form alterar a senha
+Route::get('admin/usuario/alterar/senha/{id}', 'Admin\UsuarioController@alterarSenha')->name('admin.alterar.senha.usuario');
+
+//Atualiza o usuário no bd
+Route::post('admin/usuario/atualizar/{id}', 'Admin\UsuarioController@atualizar')->name('admin.atualizar.usuario');
+
+//Atualiza a senha do usuário no bd
+Route::post('admin/usuario/atualizar/senha/{id}', 'Admin\UsuarioController@atualizarSenha')->name('admin.atualizar.senha.usuario');

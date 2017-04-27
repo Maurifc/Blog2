@@ -15,7 +15,7 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('titulo');
+            $table->string('titulo')->unique();
             $table->text('texto');
             $table->boolean('bloqueado');
             $table->dateTime('dataFantasia'); //Data que será apresentada para o usuário do blog

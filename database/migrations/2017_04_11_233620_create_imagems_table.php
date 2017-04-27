@@ -17,7 +17,7 @@ class CreateImagemsTable extends Migration
             $table->increments('id');
             $table->integer('post_id')->unsigned();
             $table->string('legenda');
-            $table->string('caminhoArquivo');
+            $table->string('caminhoArquivo')->unique();
             $table->boolean('imagemDestaque');
             $table->timestamps();
         });
