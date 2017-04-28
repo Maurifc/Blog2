@@ -31,8 +31,15 @@
                                 <a href="{{ route('admin.alterar.senha.usuario', $usuario->id) }}" class="btn btn-primary">Alterar Senha</a>
                             </td>
                             <td>
+                              {{-- Se o usuário possui algum post, ele não pode ser excluído, somente desativado. --}}
+                              @if($usuario->posts()->count() > 0)
+                                <a href="javascript:(confirm('Tem certeza que deseja desativar {{ $usuario->name }} ?')) ?
+                                    window.location.href='#': void(0)" class="btn btn-danger">Desativar</a>
+                              @else
                                 <a href="javascript:(confirm('Tem certeza que deseja deletar {{ $usuario->name }} ?')) ?
                                     window.location.href='#': void(0)" class="btn btn-danger">Excluir</a>
+
+                              @endif
                             </td>
                         </tr>
                     @endforeach

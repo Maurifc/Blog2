@@ -31,6 +31,6 @@ $factory->define(App\Post::class, function (Faker\Generator $faker) {
         'bloqueado' => 0,
         'dataFantasia' => $faker->dateTime,
         'categoria_id' => 1,
-        'usuario_id' => 1
+        'user_id' => 1
     ];
 });

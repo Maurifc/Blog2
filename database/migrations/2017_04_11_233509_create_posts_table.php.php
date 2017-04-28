@@ -20,14 +20,14 @@ class CreatePostsTable extends Migration
             $table->boolean('bloqueado');
             $table->dateTime('dataFantasia'); //Data que será apresentada para o usuário do blog
             $table->integer('categoria_id')->unsigned();
-            $table->integer('usuario_id')->unsigned();
+            $table->integer('user_id')->unsigned();
             $table->timestamps(); //Data real que o post foi criado
         });
 
 
         Schema::table('posts', function (Blueprint $table) {
             $table->foreign('categoria_id')->references('id')->on('categorias');
-            $table->foreign('usuario_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
