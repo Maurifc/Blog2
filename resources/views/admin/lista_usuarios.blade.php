@@ -15,6 +15,7 @@
                         <th width="40"></th>
                         <th width="40"></th>
                         <th width="40"></th>
+                        <th width="40"></th>
                     </tr>
                 </thead>
 
@@ -32,13 +33,19 @@
                             </td>
                             <td>
                               {{-- Se o usuário possui algum post, ele não pode ser excluído, somente desativado. --}}
-                              @if($usuario->posts()->count() > 0)
+                              @if($usuario->desativado === 0)
                                 <a href="javascript:(confirm('Tem certeza que deseja desativar {{ $usuario->name }} ?')) ?
-                                    window.location.href='#': void(0)" class="btn btn-danger">Desativar</a>
+                                    window.location.href='{{ route('admin.desativar.usuario', $usuario->id)}}': void(0)" class="btn btn-danger">Desativar</a>
                               @else
-                                <a href="javascript:(confirm('Tem certeza que deseja deletar {{ $usuario->name }} ?')) ?
-                                    window.location.href='#': void(0)" class="btn btn-danger">Excluir</a>
-
+                                <a href="{{route('admin.reativar.usuario', $usuario->id)}}" class="btn btn-success" style="width: 100%">Ativar</a>
+                              @endif
+                            </td>
+                            <td>
+                              @if($usuario->posts()->count() > 0)
+                                <a href="#" onclick="return false" class="btn btn-danger" disabled>Excluir</a>
+                              @else
+                              <a href="javascript:(confirm('Tem certeza que deseja deletar {{ $usuario->name }} ?')) ?
+                                  window.location.href='{{ route('admin.excluir.usuario', $usuario->id)}}': void(0)" class="btn btn-danger">Excluir</a>
                               @endif
                             </td>
                         </tr>

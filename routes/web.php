@@ -122,3 +122,12 @@ Route::post('admin/usuario/atualizar/{id}', 'Admin\UsuarioController@atualizar')
 
 //Atualiza a senha do usuário no bd
 Route::post('admin/usuario/atualizar/senha/{id}', 'Admin\UsuarioController@atualizarSenha')->name('admin.atualizar.senha.usuario');
+
+//Bloqueia um usuário
+Route::get('admin/usuario/bloquear/{id}', 'Admin\UsuarioController@desativar')->name('admin.desativar.usuario');
+
+//Desbloqueia um usuário
+Route::get('admin/usuario/desbloquear/{id}', 'Admin\UsuarioController@reativar')->name('admin.reativar.usuario');
+
+//Exclui um usuário
+Route::get('admin/usuario/excluir/{id}', 'Admin\UsuarioController@excluir')->name('admin.excluir.usuario');

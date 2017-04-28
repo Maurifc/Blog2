@@ -292,6 +292,7 @@ class ComposerStaticInitf5128c302cdf365b7395c69455710683
 
     public static $classMap = array (
         'AddColunaNomeCompletoUsers' => __DIR__ . '/../..' . '/database/migrations/2017_04_26_213129_add_coluna_nome_completo_users.php',
+        'AddColunaUsuarioDesativadoUsers' => __DIR__ . '/../..' . '/database/migrations/2017_04_28_192157_add_coluna_usuario_desativado_users.php',
         'App\\Categoria' => __DIR__ . '/../..' . '/app/Categoria.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
@@ -783,7 +784,6 @@ class ComposerStaticInitf5128c302cdf365b7395c69455710683
         'File_Iterator' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Iterator.php',
         'File_Iterator_Facade' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Facade.php',
         'File_Iterator_Factory' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Factory.php',
-        'FixColunaUsuarioPost' => __DIR__ . '/../..' . '/database/migrations/2017_04_27_185316_fix_coluna_usuario_post.php',
         'GuzzleHttp\\Psr7\\AppendStream' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/AppendStream.php',
         'GuzzleHttp\\Psr7\\BufferStream' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/BufferStream.php',
         'GuzzleHttp\\Psr7\\CachingStream' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/CachingStream.php',

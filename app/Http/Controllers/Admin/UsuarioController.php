@@ -109,4 +109,39 @@ class UsuarioController extends Controller
       }
     }
 
+    //Bloqueia o usuário
+    public function desativar($idUsuario){
+      try{
+        User::find($idUsuario)->desativar();
+        Alert::success("Usuário desativado com sucesso!");
+      } catch (\Exception $e){
+        Alert::danger("Falha ao desativar o usuário".$e);
+      }
+
+      return redirect()->route('admin.listar.usuarios');
+    }
+
+    //Desbloqueia o usuário
+    public function reativar($idUsuario){
+      try{
+        User::find($idUsuario)->ativar();
+        Alert::success("Usuário reativado com sucesso!");
+      } catch (\Exception $e){
+        Alert::danger("Falha ao reativar o usuário");
+      }
+
+      return redirect()->route('admin.listar.usuarios');
+    }
+
+    //Exclui o usuário
+    public function excluir($idUsuario){
+      try{
+        User::find($idUsuario)->delete();
+        Alert::success("Usuário deletado com sucesso!");
+      } catch (\Exception $e){
+        Alert::danger("Falha ao deletar o usuário");
+      }
+
+      return redirect()->route('admin.listar.usuarios');
+    }
 }
