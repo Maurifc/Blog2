@@ -2,13 +2,10 @@
 
 @section('content')
 <div class="container marginTop">
-	<div class="row">
-		<div class="col-xs-12">
-			<div class="well well-small">
-				<h4>{{ $dados['tituloPagina'] }}</h4>
-			</div>
-		</div>
-	</div>
+	<ol class="breadcrumb panel-heading">
+		<li><a href="{{ route('admin.index') }}">Início</a></li>
+		<li class="active">Adicionar imagem</li>
+	</ol>
 	<form enctype="multipart/form-data" method="POST" action="{{ $dados['rotaForm'] }}">
     {{ csrf_field() }}
 

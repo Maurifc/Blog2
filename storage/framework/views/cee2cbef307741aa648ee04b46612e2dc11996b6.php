@@ -3,7 +3,6 @@
 <div class="container">
 	<div class="row">
 		<div class="col-sm-8 blog-main">
-
 			<?php $__currentLoopData = $posts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $post): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 				<?php 
 					$postLink = route('post.mostrar', $post->id);

@@ -2,6 +2,10 @@
 
 @section('content')
 <div class="container marginTop">
+	<ol class="breadcrumb panel-heading">
+		<li><a href="{{ route('admin.index') }}">Gerenciar posts</a></li>
+		<li class="active">Adicionar post</li>
+	</ol>
 	@if(isset($post))
 		<div class="row">
 			<div class="col-xs-12">

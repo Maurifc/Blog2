@@ -1,6 +1,10 @@
 <?php $__env->startSection('content'); ?>
 <div class="container">
     <div class="row">
+      <ol class="breadcrumb panel-heading">
+        <li><a href="<?php echo e(route('post.index')); ?>">Início</a></li>
+        <li class="active">Contato</li>
+      </ol>
         <form role="form" action="<?php echo e(route('contato.enviaremail')); ?>" method="post" >
             <div class="col-lg-6">
               <?php echo e(csrf_field()); ?>

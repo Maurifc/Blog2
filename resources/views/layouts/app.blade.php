@@ -26,7 +26,7 @@
     <div class="blog-masthead">
        <div class="container">
          <nav class="blog-nav">
-            @include('layouts._includes._navbar_blog');
+            @include('layouts._includes._navbar_blog')
          </nav>
        </div>
      </div>
@@ -49,7 +49,7 @@
     </div>
   </div>
   @endif
-  
+
   @yield('content')
 
 	 <div class="blog-footer">

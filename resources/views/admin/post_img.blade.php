@@ -2,6 +2,10 @@
 
 @section('content')
 <div class="container marginTop">
+	<ol class="breadcrumb panel-heading">
+		<li><a href="{{ route('admin.index') }}">Gerenciar posts</a></li>
+		<li class="active">Imagens de {{ $post->titulo }}</li>
+	</ol>
 	<div class="row">
 		<div class="col-xs-12">
 			<a href="{{route('admin.upload.imagem', $post->id)}}" class="btn btn-primary btn-large">Cadastrar nova imagem</a>

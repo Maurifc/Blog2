@@ -4,7 +4,10 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-8 blog-main">
-
+      <ol class="breadcrumb panel-heading">
+        <li><a href="{{ route('post.index') }}">Início</a></li>
+        <li class="active">{{ $post->titulo }}</li>
+      </ol>
       <div class="blog-post">
         <h2 class="blog-post-title">{{ $post->titulo }}</h2>
         <p class="blog-post-meta">{{ $post->dataFantasia }} por {{$post->usuario->name}}. Categoria: <strong>{{$post->categoria->titulo}}</strong></p>

@@ -5,7 +5,6 @@
 <div class="container">
 	<div class="row">
 		<div class="col-sm-8 blog-main">
-
 			@foreach($posts as $post)
 				@php
 					$postLink = route('post.mostrar', $post->id);

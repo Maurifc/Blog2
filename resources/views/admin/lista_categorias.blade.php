@@ -2,6 +2,9 @@
 
 @section('content')
 <div class="container marginTop">
+  <ol class="breadcrumb panel-heading">
+    <li class="active">Gerenciar categorias</li>
+  </ol>
     <div class="row">
         <div class="col-xs-12">
             <a href="{{route('admin.cadastrar.categoria')}}" class="btn btn-primary btn-large">Cadastrar nova categoria</a>

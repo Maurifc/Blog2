@@ -13,22 +13,19 @@
 | Blog
 */
 //Página inicial
-Route::get('/', ['uses' => 'PostController@index', 'as' => 'post.index']);
+Route::get('/', 'Blog\PostController@index')->name('post.index');
 
 //Exibir um post (view)
-Route::get('/post/{id}', ['uses' => 'PostController@mostrarPost', 'as' => 'post.mostrar']);
+Route::get('/post/{id}', 'Blog\PostController@mostrarPost')->name('post.mostrar');
 
 //Exibe posts somente de uma determinada categoria
-Route::get('/posts/categoria/{id}', ['uses' =>
-  'PostController@mostraPorCategoria', 'as' => 'post.categoria']);
+Route::get('/posts/categoria/{id}', 'Blog\PostController@mostraPorCategoria')->name('post.categoria');
 
 //Exibe a página de contato
-Route::get('/contato', ['uses' => 'ContatoController@mostrarForm', 'as' =>
-                                                      'contato.form']);
+Route::get('/contato', 'Blog\ContatoController@mostrarForm')->name('contato.form');
 
 //Envia o email de contato
-Route::post('/contato/enviaremail', ['uses' => 'ContatoController@enviarEmail',
-                                                'as' => 'contato.enviaremail']);
+Route::post('/contato/enviaremail', 'Blog\ContatoController@enviarEmail')->name('contato.enviaremail');
 
 /*
 | Painel do Administrador

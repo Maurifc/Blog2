@@ -2,7 +2,10 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-8 blog-main">
-
+      <ol class="breadcrumb panel-heading">
+        <li><a href="<?php echo e(route('post.index')); ?>">Início</a></li>
+        <li class="active"><?php echo e($post->titulo); ?></li>
+      </ol>
       <div class="blog-post">
         <h2 class="blog-post-title"><?php echo e($post->titulo); ?></h2>
         <p class="blog-post-meta"><?php echo e($post->dataFantasia); ?> por <?php echo e($post->usuario->name); ?>. Categoria: <strong><?php echo e($post->categoria->titulo); ?></strong></p>

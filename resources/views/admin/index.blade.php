@@ -2,6 +2,9 @@
 
 @section('content')
 <div class="container marginTop">
+	<ol class="breadcrumb panel-heading">
+		<li class="active">Gerenciar posts</li>
+	</ol>
     <div class="row">
         <div class="col-xs-12">
             <a href="{{route('admin.cadastrar.post')}}" class="btn btn-primary btn-large">Cadastrar novo post</a>

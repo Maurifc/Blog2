@@ -2,6 +2,9 @@
 
 @section('content')
 <div class="container marginTop">
+  <ol class="breadcrumb panel-heading">
+    <li>Gerenciar usuários</li>
+  </ol>
     <div class="row">
         <div class="col-xs-12">
             <a href="{{route('admin.cadastrar.usuario')}}" class="btn btn-primary btn-large">Cadastrar novo usuário</a>

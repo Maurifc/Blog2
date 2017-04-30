@@ -2,6 +2,10 @@
 
 @section('content')
 <div class="container marginTop">
+	<ol class="breadcrumb panel-heading">
+		<li><a href="{{ route('admin.listar.categorias') }}">Gerenciar categorias</a></li>
+		<li class="active">Adicionar-Alterar categoria</li>
+	</ol>
 	<form method="POST" action="{{ $dados['rota'] }}">
 		{{ csrf_field() }}
 		<div class="row">

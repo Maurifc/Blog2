@@ -3,6 +3,10 @@
 @section('content')
 <div class="container">
     <div class="row">
+      <ol class="breadcrumb panel-heading">
+        <li><a href="{{ route('post.index') }}">Início</a></li>
+        <li class="active">Contato</li>
+      </ol>
         <form role="form" action="{{ route('contato.enviaremail')}}" method="post" >
             <div class="col-lg-6">
               {{ csrf_field() }}

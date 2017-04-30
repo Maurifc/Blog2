@@ -26,7 +26,7 @@
     <div class="blog-masthead">
        <div class="container">
          <nav class="blog-nav">
-            <?php echo $__env->make('layouts._includes._navbar_blog', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>;
+            <?php echo $__env->make('layouts._includes._navbar_blog', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
          </nav>
        </div>
      </div>
@@ -49,7 +49,7 @@
     </div>
   </div>
   <?php endif; ?>
-  
+
   <?php echo $__env->yieldContent('content'); ?>
 
 	 <div class="blog-footer">
