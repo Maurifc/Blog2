@@ -18,35 +18,48 @@ class PostController extends Controller
 
   //Exibe os posts cadastrados no blog
   public function index(){
-    $posts = Post::all();
+    try{
+      $posts = Post::orderBy('dataFantasia', 'desc')->get();
 
-    return view('admin.index', compact('posts'));
+      return view('admin.index', compact('posts'));
+    } catch (\Exception $e){
+      Alert::danger('Falha ao processar a requisição');
+      return redirect()->route('admin.index');
+    }
   }
 
   //View para cadastrar novo Post
   public function cadastrarPost(){
-    $dados = [
-      'rota' => route('admin.salvar.post'),
-      'botaoSubmit' => 'Cadastrar'
-    ];
+    try{
+      $dados = [
+        'rota' => route('admin.salvar.post'),
+        'botaoSubmit' => 'Cadastrar'
+      ];
 
-    $categorias = Categoria::all();
-
-    return view('admin.post', compact(['dados', 'categorias']));
+      $categorias = Categoria::all();
+      return view('admin.post', compact(['dados', 'categorias']));
+    } catch (\Exception $e){
+      Alert::danger('Falha ao processar a requisição');
+      return redirect()->route('post.index');
+    }
   }
 
   //View para editar um Post
   public function editarPost($id){
-    $post = Post::find($id);
+    try{
+      $post = Post::findOrFail($id);
 
-    $dados = [
-      'rota' => route('admin.atualizar.post', $id),
-      'botaoSubmit' => 'Atualizar'
-    ];
+      $dados = [
+        'rota' => route('admin.atualizar.post', $id),
+        'botaoSubmit' => 'Atualizar'
+      ];
 
-    $categorias = Categoria::orderBy('titulo', 'asc')->get();
-
-    return view('admin.post', compact(['dados', 'categorias', 'post']));
+      $categorias = Categoria::orderBy('titulo', 'asc')->get();
+      return view('admin.post', compact(['dados', 'categorias', 'post']));
+    } catch (\Exception $e){
+      Alert::danger('Falha ao processar a requisição');
+      return redirect()->route('admin.index');
+    }
   }
 
   //Salvar um post no banco de dados
@@ -61,22 +74,15 @@ class PostController extends Controller
       $post->dataFantasia = $data->format('Y-m-d H:i:s');
       $post->bloqueado = $request->input('bloqueado');
       $post->categoria_id = $request->input('categoria');
-      $post->usuario_id = \Auth::user()->id;
+      $post->user_id = \Auth::user()->id;
 
       //Salvar no banco de dados
       $post->save();
 
       //Mensagem de sucesso
-      \Session::flash('flash_message', [
-        'msg' => "Post cadastrado com sucesso!",
-        'class' => "alert-success"
-      ]);
-
+      Alert::success('Post cadastrado com sucesso!');
     } catch(\Exception $e){
-      \Session::flash('flash_message', [
-        'msg' => "Erro ao cadastrar o post",
-        'class' => "alert-danger"
-      ]);
+      Alert::danger('Erro ao cadastrar o post');
     } finally {
       return redirect()->route('admin.cadastrar.post');
     }
@@ -86,7 +92,7 @@ class PostController extends Controller
   public function atualizarPost(PostRequest $request, $id){
     try{
       //Cria um post a partir das requests
-      $post = Post::find($id);
+      $post = Post::findOrFail($id);
       $post-> dataFantasia = \DateTime::createFromFormat("d/m/Y H:i", $request->input('dataFantasia'));
       $post->titulo = $request->input('titulo');
       $post->texto = $request->input('texto');
@@ -97,18 +103,10 @@ class PostController extends Controller
       $post->save();
 
       //Mostra a mensagem de sucesso
-      \Session::flash('flash_message', [
-        'msg' => 'Post atualizado com sucesso',
-        'class' => 'alert-success'
-      ]);
-
+      Alert::success('Post atualizado com sucesso!');
     } catch (\Exception $e){
       //Mostra a mensagem de erro
-      \Session::flash('flash_message', [
-        'msg' => 'Falha ao atualizar o Post:'.$e,
-        'class' => 'alert-danger'
-      ]);
-
+      Alert::danger('Falha ao atualizar o Post');
       return redirect()->route('admin.alterar.post', $id);
     }
 
@@ -119,7 +117,7 @@ class PostController extends Controller
   public function deletarPost($id){
     try{
       //Pega o post
-      $post = Post::find($id);
+      $post = Post::findOrFail($id);
 
       //Deleta todas as imagens referente ao Post
       $post->deletarImagens();
@@ -128,18 +126,10 @@ class PostController extends Controller
       $post->delete();
 
       //Mostra a mensagem de sucesso
-      \Session::flash('flash_message', [
-        'msg' => 'Post deletado com sucesso',
-        'class' => 'alert-success'
-      ]);
+      Alert::success('Post deletado com sucesso');
 
     } catch (\Exception $e){
-
-      //Mostra a mensagem de sucesso
-      \Session::flash('flash_message', [
-        'msg' => 'Falha ao deletar o post: '.$post->titulo.$e,
-        'class' => 'alert-danger'
-      ]);
+      Alert::danger('Falha ao deletar o post: '.$post->titulo.$e);
     }
 
     return redirect()->route('admin.index');
@@ -147,7 +137,7 @@ class PostController extends Controller
 
   public function postImagens($id){
     try{
-      $post = Post::find($id);
+      $post = Post::findOrFail($id);
 
       return view('admin.post_img', compact('post'));
     } catch(\Exception $e) {

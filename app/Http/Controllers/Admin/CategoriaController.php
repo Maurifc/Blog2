@@ -19,7 +19,11 @@ class CategoriaController extends Controller
       try{
         $categorias = Categoria::orderBy('titulo', 'asc')->get();
 
-        return view('admin.lista_categorias', compact('categorias'))  ;
+        $dados = [
+          'aba' => 1
+        ];
+
+        return view('admin.lista_categorias', compact('categorias', 'dados'))  ;
       } catch (\Exception $e){
         Alert::danger('Falha ao abrir a lista de categorias.');
         return redirect()->route('admin.index');
@@ -29,10 +33,11 @@ class CategoriaController extends Controller
     //Exibe o form de edição de categorias
     public function alterarCategoria($idCategoria){
       try{
-        $categoria = Categoria::find($idCategoria);
+        $categoria = Categoria::findOrFail($idCategoria);
         $dados = [
           'rota' => route('admin.atualizar.categoria', $idCategoria),
-          'botaoSubmit' => 'Atualizar'
+          'botaoSubmit' => 'Atualizar',
+          'aba' => 1
         ];
 
         return view('admin.form_categoria', compact('categoria', 'dados'));
@@ -45,7 +50,7 @@ class CategoriaController extends Controller
     //Atualiza uma categoria no BD
     public function atualizarCategoria(CategoriaRequest $request, $idCategoria){
       try{
-        Categoria::find($idCategoria)->update($request->all());
+        Categoria::findOrFail($idCategoria)->update($request->all());
 
         Alert::success("Categoria atualizada com sucesso!");
         return redirect()->route('admin.listar.categorias');
@@ -60,7 +65,8 @@ class CategoriaController extends Controller
       try{
         $dados = [
           'rota' => route('admin.salvar.categoria'),
-          'botaoSubmit' => 'Cadastrar'
+          'botaoSubmit' => 'Cadastrar',
+          'aba' => 1
         ];
 
         return view('admin.form_categoria', compact('dados'));
@@ -86,7 +92,7 @@ class CategoriaController extends Controller
     //Apaga uma categoria do BD
     public function deletar($idCategoria){
       try{
-        Categoria::find($idCategoria)->delete();
+        Categoria::findOrFail($idCategoria)->delete();
 
         Alert::success('Categoria deletada com sucesso!');
       } catch (\Exception $e){

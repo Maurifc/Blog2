@@ -16,7 +16,7 @@
 Route::get('/', ['uses' => 'PostController@index', 'as' => 'post.index']);
 
 //Exibir um post (view)
-Route::get('/post/{id}', ['uses' => 'PostController@mostrar', 'as' => 'post.mostrar']);
+Route::get('/post/{id}', ['uses' => 'PostController@mostrarPost', 'as' => 'post.mostrar']);
 
 //Exibe posts somente de uma determinada categoria
 Route::get('/posts/categoria/{id}', ['uses' =>

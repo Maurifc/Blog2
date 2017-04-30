@@ -13,12 +13,15 @@ class UsuarioController extends Controller
       $this->middleware('auth');
     }
 
-    //Lista os usuários
+    //Lista os usuári os
     public function listar(){
       try{
         $usuarios = User::all();
+        $dados = [
+          'aba' => 2
+        ];
 
-        return view('admin.lista_usuarios', compact('usuarios'));
+        return view('admin.lista_usuarios', compact('usuarios', 'dados'));
       } catch (\Exception $e){
         Alert::danger('Falha ao abrir a lista de usuários');
         return redirect()->route('admin.index');
@@ -32,7 +35,8 @@ class UsuarioController extends Controller
           'rota' => route('register'),
           'tituloForm' => 'Cadastrar usuário',
           'botaoSubmit' => 'Cadastrar',
-          'modo' => 'cadastrar'
+          'modo' => 'cadastrar',
+          'aba' => 2
         ];
 
         return view('admin.form_usuario', compact('dados'));
@@ -45,13 +49,14 @@ class UsuarioController extends Controller
     //Exibe a view para alteração de usuários
     public function alterar($idUsuario){
       try{
-        $usuario = User::find($idUsuario);
+        $usuario = User::findOrFail($idUsuario);
 
         $dados = [
           'rota' => route('admin.atualizar.usuario', $idUsuario),
           'tituloForm' => 'Alterar usuário',
           'botaoSubmit' => 'Atualizar',
-          'modo' => 'alterar'
+          'modo' => 'alterar',
+          'aba' => 2
         ];
 
         return view('admin.form_usuario', compact('dados', 'usuario'));
@@ -68,7 +73,8 @@ class UsuarioController extends Controller
           'rota' => route('admin.atualizar.senha.usuario', $idUsuario),
           'tituloForm' => 'Alterar senha',
           'botaoSubmit' => 'Alterar',
-          'modo' => 'alterarSenha'
+          'modo' => 'alterarSenha',
+          'aba' => 2
         ];
 
         return view('admin.form_usuario', compact('dados', 'usuario'));
@@ -81,7 +87,7 @@ class UsuarioController extends Controller
     //Atualiza o usuário
     public function atualizar(Request $request, $idUsuario){
       try{
-        $usuario = User::find($idUsuario);
+        $usuario = User::findOrFail($idUsuario);
         $usuario->update($request->all());
 
         Alert::success('Usuário atualizado com sucesso');
@@ -96,7 +102,7 @@ class UsuarioController extends Controller
     //Atualiza a senha do usuário
     public function atualizarSenha(Request $request, $idUsuario){
       try{
-        $usuario = User::find($idUsuario);
+        $usuario = User::findOrFail($idUsuario);
         $usuario->password = bcrypt($request->input('password'));
 
         $usuario->update();
@@ -112,7 +118,7 @@ class UsuarioController extends Controller
     //Bloqueia o usuário
     public function desativar($idUsuario){
       try{
-        User::find($idUsuario)->desativar();
+        User::findOrFail($idUsuario)->desativar();
         Alert::success("Usuário desativado com sucesso!");
       } catch (\Exception $e){
         Alert::danger("Falha ao desativar o usuário".$e);
@@ -124,7 +130,7 @@ class UsuarioController extends Controller
     //Desbloqueia o usuário
     public function reativar($idUsuario){
       try{
-        User::find($idUsuario)->ativar();
+        User::findOrFail($idUsuario)->ativar();
         Alert::success("Usuário reativado com sucesso!");
       } catch (\Exception $e){
         Alert::danger("Falha ao reativar o usuário");
@@ -136,7 +142,7 @@ class UsuarioController extends Controller
     //Exclui o usuário
     public function excluir($idUsuario){
       try{
-        User::find($idUsuario)->delete();
+        User::findOrFail($idUsuario)->delete();
         Alert::success("Usuário deletado com sucesso!");
       } catch (\Exception $e){
         Alert::danger("Falha ao deletar o usuário");

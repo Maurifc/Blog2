@@ -20,7 +20,7 @@ class ImagemController extends Controller
   //View para alterar dados de uma determinada imagem
   public function alterarImagem($id){
     try{
-      $imagem = Imagem::find($id);
+      $imagem = Imagem::findOrFail($id);
 
       //Dados para o formulário
       $dados = [
@@ -40,7 +40,7 @@ class ImagemController extends Controller
   //Exibe a view para upload de imagem
   public function uploadImagem($id){
     try{
-      $post = Post::find($id);
+      $post = Post::findOrFail($id);
 
       $dados = [
         'tituloPagina' => 'Upload de imagem',
@@ -50,7 +50,7 @@ class ImagemController extends Controller
 
       return view('admin.form_img', compact('dados', 'post'));
     } catch(\Exception $e){
-      Alert::danger('Falha ao abrir sua solicitação: Upload de imagem');
+      Alert::danger('Falha ao abrir sua solicitação');
     }
 
     return redirect()->route('admin.post.imagens', $id);
@@ -60,7 +60,7 @@ class ImagemController extends Controller
   public function salvarImagem(ImagemRequest $request, $postId){
     try{
       //Pega o post que a imagem pertence
-      $post = Post::find($postId);
+      $post = Post::findOrFailOrFail($postId);
 
       //Salva a imagem no disco (já criando as miniaturas)
       $nomeImagem = ImagemUtil::salvar($request->file('imagem')); ;
@@ -88,7 +88,7 @@ class ImagemController extends Controller
   //Atualiza uma imagem no banco de dados
   public function atualizarImagem(ImagemRequest $request, $imagemId){
     try{
-      $imagem = Imagem::find($imagemId);
+      $imagem = Imagem::findOrFail($imagemId);
       $imagem->update($request->all());
 
       Alert::success('Imagem atualizada com sucesso!');
@@ -102,7 +102,7 @@ class ImagemController extends Controller
   //Remove uma imagem
   public function removerImagem($id){
     try{
-      $imagem = Imagem::find($id);
+      $imagem = Imagem::findOrFail($id);
 
       //Remove a imagem do disco
       ImagemUtil::deletar($imagem);

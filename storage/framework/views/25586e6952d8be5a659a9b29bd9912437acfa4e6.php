@@ -38,6 +38,18 @@
 		</div>
 	</div>
 
+  <?php if(Session::has('flash_message')): ?>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-10 xol-xs-offset-1">
+        <div class="alert <?php echo e(Session::get('flash_message')['class']); ?>">
+          <p class="text-center"><?php echo e(Session::get('flash_message')['msg']); ?></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <?php endif; ?>
+  
   <?php echo $__env->yieldContent('content'); ?>
 
 	 <div class="blog-footer">

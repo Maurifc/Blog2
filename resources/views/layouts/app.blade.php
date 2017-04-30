@@ -38,6 +38,18 @@
 		</div>
 	</div>
 
+  @if(Session::has('flash_message'))
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-10 xol-xs-offset-1">
+        <div class="alert {{ Session::get('flash_message')['class'] }}">
+          <p class="text-center">{{ Session::get('flash_message')['msg'] }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  @endif
+  
   @yield('content')
 
 	 <div class="blog-footer">
