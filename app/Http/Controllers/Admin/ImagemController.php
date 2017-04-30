@@ -60,7 +60,7 @@ class ImagemController extends Controller
   public function salvarImagem(ImagemRequest $request, $postId){
     try{
       //Pega o post que a imagem pertence
-      $post = Post::findOrFailOrFail($postId);
+      $post = Post::findOrFail($postId);
 
       //Salva a imagem no disco (já criando as miniaturas)
       $nomeImagem = ImagemUtil::salvar($request->file('imagem')); ;

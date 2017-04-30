@@ -21,7 +21,7 @@ class PostController extends Controller
     try{
       $posts = Post::orderBy('dataFantasia', 'desc')->get();
 
-      return view('admin.index', compact('posts'));
+      return view('admin.lista_posts', compact('posts'));
     } catch (\Exception $e){
       Alert::danger('Falha ao processar a requisição');
       return redirect()->route('admin.index');
@@ -37,10 +37,10 @@ class PostController extends Controller
       ];
 
       $categorias = Categoria::all();
-      return view('admin.post', compact(['dados', 'categorias']));
+      return view('admin.form_post', compact(['dados', 'categorias']));
     } catch (\Exception $e){
       Alert::danger('Falha ao processar a requisição');
-      return redirect()->route('post.index');
+      return redirect()->route('admin.index');
     }
   }
 
@@ -55,7 +55,7 @@ class PostController extends Controller
       ];
 
       $categorias = Categoria::orderBy('titulo', 'asc')->get();
-      return view('admin.post', compact(['dados', 'categorias', 'post']));
+      return view('admin.form_post', compact(['dados', 'categorias', 'post']));
     } catch (\Exception $e){
       Alert::danger('Falha ao processar a requisição');
       return redirect()->route('admin.index');
@@ -139,7 +139,7 @@ class PostController extends Controller
     try{
       $post = Post::findOrFail($id);
 
-      return view('admin.post_img', compact('post'));
+      return view('admin.lista_imagens', compact('post'));
     } catch(\Exception $e) {
       Alert::danger('Falha ao abrir as imagens do post');
     }
