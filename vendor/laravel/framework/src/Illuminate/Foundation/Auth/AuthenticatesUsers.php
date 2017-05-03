@@ -72,15 +72,9 @@ trait AuthenticatesUsers
      */
     protected function attemptLogin(Request $request)
     {
-      if(User::where('name', $request->input('name'))->
-          where('desativado', 1)->get()->count())
-      {
-        return false;
-      } else {
         return $this->guard()->attempt(
             $this->credentials($request), $request->has('remember')
         );
-      }
     }
 
     /**

@@ -6,36 +6,62 @@ use Illuminate\Database\Eloquent\Model;
 
 class Imagem extends Model
 {
-  protected $fillable = ['post_id', 'legenda', 'caminhoArquivo', 'imagemDestaque'];
-  private $uploadedImagesPath ='/uploads/imgs/';
-  const COLUNA_NOME = 'caminhoArquivo';
+  protected $fillable = ['post_id', 'legenda', 'nomeArquivo', 'imagemDestaque'];
+  const CAMINHO_PASTA_IMAGENS ='/uploads/imgs/';
+  const COLUNA_NOME = 'nomeArquivo';
+  const PASTA_SM = 'sm';
+  const PASTA_MD = 'md';
 
   public function post(){
     return $this->belongsTo(Post::class);
   }
 
   public function urlSm(){
-    return url($this->uploadedImagesPath.'sm/'.$this->caminhoArquivo);
+    return url($this->url(self::PASTA_SM));
   }
 
   public function urlMd(){
-    return url($this->uploadedImagesPath.'md/'.$this->caminhoArquivo);
+    return url($this->url(self::PASTA_MD));
   }
 
-  public function url(){
-    return url($this->uploadedImagesPath.$this->caminhoArquivo);
+  /*
+  |Retona a url da imagem
+  |Retorna a url da imagem em uma subpasta, caso a subpasta seja informada no
+  |                                                             parâmetro
+  */
+  public function url($subpasta=null){
+    $path = self::CAMINHO_PASTA_IMAGENS;
+
+    //Se recebeu uma subspasta (por parâmetro), então concatena no final do caminho
+    if(isset($subpasta)){
+      $path = $path.$subpasta.'/';
+    }
+
+    return url($path.$this->nomeArquivo);
   }
 
   public function caminhoSm(){
-    return public_path().$this->uploadedImagesPath.'sm/'.$this->caminhoArquivo;
+    return $this->caminho(self::PASTA_SM);
   }
 
   public function caminhoMd(){
-    return public_path().$this->uploadedImagesPath.'md/'.$this->caminhoArquivo;
+    return $this->caminho(self::PASTA_MD);
   }
 
-  public function caminho(){
-    return public_path().$this->uploadedImagesPath.$this->caminhoArquivo;
+  /*
+  |Retona o caminho da imagem
+  |Retorna o caminho da imagem em uma subpasta, caso a subpasta seja informada no
+  |                                                             parâmetro
+  */
+  public function caminho($subpasta=null){
+    $path = public_path().self::CAMINHO_PASTA_IMAGENS;
+
+    //Trata o parâmetro (adiciona uma '/' ao final do caminho)
+    if(isset($subpasta)){
+      $path = $path.$subpasta.'/';
+    }
+
+    return $path.$this->nomeArquivo;
   }
 
 }

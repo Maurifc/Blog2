@@ -69,7 +69,7 @@ class ImagemController extends Controller
       $imagemModel = new Imagem();
       $imagemModel->legenda = $request->input('legenda');
       $imagemModel->imagemDestaque = $request->input('imagemDestaque');
-      $imagemModel->caminhoArquivo = $nomeImagem;
+      $imagemModel->nomeArquivo = $nomeImagem;
 
       //insere no banco de dados
       $post->imagens()->save($imagemModel);

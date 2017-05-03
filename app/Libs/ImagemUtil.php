@@ -23,7 +23,6 @@ class ImagemUtil{
 
     //Salva na pasta Upload/imgs com a extegonsão definida acima
     $imagem->save('uploads/imgs/'.$nomeImagem, 80);
-    //$request->photo->storeAs('uploads/imgs', $nomeImagem.'.jpg');
 
     //Salva a imagem (de tamanho médio) na pasta Upload/imgs/md
     $imagem->resize(420, 270)->save('uploads/imgs/md/'.$nomeImagem);
