@@ -17,9 +17,9 @@
 												{{$post->usuario->name}}. Categoria:
 															<strong>{{$post->categoria->titulo}}</strong></p>
 
-						@if(count($post->imagemDestaque) === 1)
+						@if(count($post->imagemDestaque()) === 1)
 							<a href="{{ $postLink }}">
-								<p><img src="{{ url($post->imagemDestaque[0]->url()) }}"
+								<p><img src="{{ url($post->imagemDestaque()->url()) }}"
 										 															width="80%" height="30%"/></p>
 							</a>
 				    @endif

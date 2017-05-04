@@ -23,7 +23,7 @@ class Post extends Model
     }
 
     public function imagemDestaque(){
-        return $this->imagens()->where('imagemDestaque', 1)->take(1);
+        return $this->imagens()->where('imagemDestaque', 1)->first();
     }
 
     public function deletarImagens(){

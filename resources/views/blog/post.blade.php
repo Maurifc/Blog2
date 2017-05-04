@@ -12,8 +12,8 @@
         <h2 class="blog-post-title">{{ $post->titulo }}</h2>
         <p class="blog-post-meta">{{ $post->dataFantasia }} por {{$post->usuario->name}}. Categoria: <strong>{{$post->categoria->titulo}}</strong></p>
 
-        @if(count($post->imagemDestaque) === 1)
-          <p><img src="{{ url($post->imagemDestaque[0]->url()) }}" width="80%" height="30%"/></p>
+        @if(count($post->imagemDestaque()) === 1)
+          <p><img src="{{ url($post->imagemDestaque()->url()) }}" width="80%" height="30%"/></p>
         @endif
 
         <div class="blog-post-text">

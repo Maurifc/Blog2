@@ -4,6 +4,7 @@
 <div class="container marginTop">
 	<ol class="breadcrumb panel-heading">
 		<li><a href="{{ route('admin.index') }}">Início</a></li>
+		<li><a href="{{ route('admin.post.imagens', $post->id) }}">Imagens de {{ $post->titulo }}</a></li>
 		<li class="active">Adicionar imagem</li>
 	</ol>
 
@@ -35,6 +36,7 @@
 					</div>
 				</div>
 
+				@if(($post->imagemDestaque() !== null && $post->imagemDestaque()->id == $imagem->id) || $post->imagemDestaque() === null)
 				<div class="row marginTop">
 					<div class="col-xs-3">
 							<strong>Imagem destaque?</strong>
@@ -48,6 +50,7 @@
 							</label>
 					</div>
 				</div>
+				@endif
 
 				<div class="row marginTop">
 					<div class="col-xs-2">

@@ -25,8 +25,7 @@ class ImagemRequest extends FormRequest
     {
         return [
             'imagem' => 'image',
-            'legenda' => 'required|max:100',
-            'imagemDestaque' => 'required'
+            'legenda' => 'required|max:100'
         ];
     }
 
@@ -34,8 +33,7 @@ class ImagemRequest extends FormRequest
       return [
         'imagem.image' => 'Por favor, selecione uma imagem nos formatos jpeg, png, ou gif',
         'legenda.required' => 'Preencha corretamente o campo',
-        'legenda.max' => 'O máximo de caracteres permito é 100',
-        'imagemDestaque.required' => 'Defina se a imagem é destaque ou não'
+        'legenda.max' => 'O máximo de caracteres permito é 100'
       ];
     }
 }

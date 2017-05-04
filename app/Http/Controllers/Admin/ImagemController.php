@@ -21,6 +21,7 @@ class ImagemController extends Controller
   public function alterarImagem($id){
     try{
       $imagem = Imagem::findOrFail($id);
+      $post = $imagem->post;
 
       //Dados para o formulário
       $dados = [
@@ -29,7 +30,7 @@ class ImagemController extends Controller
         'labelSubmmit' => 'Atualizar'
       ];
 
-      return view('admin.form_img', compact('imagem', 'dados'));
+      return view('admin.form_img', compact('imagem', 'dados', 'post'));
     } catch (\Exception $e) {
       Alert::danger('Falha ao abrir a imagem para alterações');
     }
@@ -68,8 +69,14 @@ class ImagemController extends Controller
       //Monta o model para inserção no banco de dados
       $imagemModel = new Imagem();
       $imagemModel->legenda = $request->input('legenda');
-      $imagemModel->imagemDestaque = $request->input('imagemDestaque');
       $imagemModel->nomeArquivo = $nomeImagem;
+
+      //Verifica se já existe uma imagem em destaque no Post
+      if($post->imagemDestaque()){
+        $imagemModel->imagemDestaque = 0; //Caso exista, ela é inserida como imagem comum
+      } else {
+        $imagemModel->imagemDestaque = $request->input('imagemDestaque');
+      }
 
       //insere no banco de dados
       $post->imagens()->save($imagemModel);
@@ -78,7 +85,7 @@ class ImagemController extends Controller
       Alert::success('Imagem '.$imagemModel->legeda.' inserida com sucesso!');
 
     } catch (\Exception $e){
-      Alert::danger("Falha ao inserir a imagem.");
+      Alert::danger("Falha ao inserir a imagem".$e);
     }
 
     //Retorna para a página de upload de imagens
