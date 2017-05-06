@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoriaRequest;
 use App\Categoria;
+use App\Libs\DadosView;
+use App\Libs\DadosViewForm;
 use App\Libs\Alert;
 
 class CategoriaController extends Controller
@@ -19,9 +21,7 @@ class CategoriaController extends Controller
       try{
         $categorias = Categoria::orderBy('titulo', 'asc')->get();
 
-        $dados = [
-          'aba' => 1
-        ];
+        $dados = new DadosView('Gerenciar categorias', DadosView::ABA_GERENCIAR_CATEGORIAS);
 
         return view('admin.lista_categorias', compact('categorias', 'dados'))  ;
       } catch (\Exception $e){
@@ -34,11 +34,10 @@ class CategoriaController extends Controller
     public function alterarCategoria($idCategoria){
       try{
         $categoria = Categoria::findOrFail($idCategoria);
-        $dados = [
-          'rota' => route('admin.atualizar.categoria', $idCategoria),
-          'botaoSubmit' => 'Atualizar',
-          'aba' => 1
-        ];
+
+        $dados = new DadosViewForm('Editar categoria', DadosViewForm::ABA_GERENCIAR_CATEGORIAS);
+        $dados->setRotaSubmit(route('admin.atualizar.categoria', $idCategoria));
+        $dados->setLabelBotaoSubmit('Atualizar');
 
         return view('admin.form_categoria', compact('categoria', 'dados'));
       } catch (\Exception $e){
@@ -63,11 +62,9 @@ class CategoriaController extends Controller
     //Exibe o form para a criação de um nova categoria
     public function cadastrar(){
       try{
-        $dados = [
-          'rota' => route('admin.salvar.categoria'),
-          'botaoSubmit' => 'Cadastrar',
-          'aba' => 1
-        ];
+        $dados = new DadosViewForm('Cadastrar categoria', DadosViewForm::ABA_GERENCIAR_CATEGORIAS);
+        $dados->setRotaSubmit(route('admin.salvar.categoria'));
+        $dados->setLabelBotaoSubmit('Cadastrar');
 
         return view('admin.form_categoria', compact('dados'));
       } catch (\Exception $e){

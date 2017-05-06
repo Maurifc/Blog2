@@ -4,11 +4,15 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Libs\DadosView;
+use App\Libs\DadosViewForm;
 use App\Libs\Alert;
 use App\User;
 
 class UsuarioController extends Controller
 {
+    const ABA = DadosView::ABA_GERENCIAR_USUARIOS;
+
     public function __construct(){
       $this->middleware('auth');
     }
@@ -17,9 +21,8 @@ class UsuarioController extends Controller
     public function listar(){
       try{
         $usuarios = User::all();
-        $dados = [
-          'aba' => 2
-        ];
+
+        $dados = new DadosView('Gerenciar usuários', self::ABA);
 
         return view('admin.lista_usuarios', compact('usuarios', 'dados'));
       } catch (\Exception $e){
@@ -31,13 +34,10 @@ class UsuarioController extends Controller
     //Exibe a view para cadastro de usuários
     public function cadastrar(){
       try{
-        $dados = [
-          'rota' => route('register'),
-          'tituloForm' => 'Cadastrar usuário',
-          'botaoSubmit' => 'Cadastrar',
-          'modo' => 'cadastrar',
-          'aba' => 2
-        ];
+        $dados = new DadosViewForm('Cadastrar usuário', self::ABA);
+        $dados->setRotaSubmit(route('register')).
+        $dados->setLabelBotaoSubmit('Cadastrar');
+        $dados->setModo(DadosViewForm::MODO_CADASTRO);
 
         return view('admin.form_usuario', compact('dados'));
       } catch (\Exception $e){
@@ -51,13 +51,10 @@ class UsuarioController extends Controller
       try{
         $usuario = User::findOrFail($idUsuario);
 
-        $dados = [
-          'rota' => route('admin.atualizar.usuario', $idUsuario),
-          'tituloForm' => 'Alterar usuário',
-          'botaoSubmit' => 'Atualizar',
-          'modo' => 'alterar',
-          'aba' => 2
-        ];
+        $dados = new DadosViewForm('Editar usuário', self::ABA);
+        $dados->setRotaSubmit(route('admin.atualizar.usuario', $idUsuario)).
+        $dados->setLabelBotaoSubmit('Atualizar');
+        $dados->setModo(DadosViewForm::MODO_EDICAO);
 
         return view('admin.form_usuario', compact('dados', 'usuario'));
       } catch (\Exception $e){
@@ -69,13 +66,10 @@ class UsuarioController extends Controller
     //Exibe a view para alteração de usuários
     public function alterarSenha($idUsuario){
       try{
-        $dados = [
-          'rota' => route('admin.atualizar.senha.usuario', $idUsuario),
-          'tituloForm' => 'Alterar senha',
-          'botaoSubmit' => 'Alterar',
-          'modo' => 'alterarSenha',
-          'aba' => 2
-        ];
+        $dados = new DadosViewForm('Redefinir senha', self::ABA);
+        $dados->setRotaSubmit(route('admin.atualizar.usuario', $idUsuario)).
+        $dados->setLabelBotaoSubmit('Redefinir');
+        $dados->setModo('alterar_senha');
 
         return view('admin.form_usuario', compact('dados', 'usuario'));
       } catch (\Exception $e){

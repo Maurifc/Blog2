@@ -162,9 +162,10 @@ h6, .h6 {
  */
 
 .blog-footer {
-  padding: 40px 0;
-  color: #999;
+  padding: 40px 0px;
+  margin-top: 40px;
+  color: #fff;
   text-align: center;
-  background-color: #f9f9f9;
+  background-color: rgb(191, 83, 41);
   border-top: 1px solid #e5e5e5;
 }

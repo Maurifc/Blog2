@@ -3,7 +3,7 @@
 @section('content')
 <div class="container marginTop">
   <ol class="breadcrumb panel-heading">
-    <li>Gerenciar usuários</li>
+    <li>{{ $dados->getTituloPagina() }}</li>
   </ol>
     <div class="row">
         <div class="col-xs-12">

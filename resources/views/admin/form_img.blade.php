@@ -5,15 +5,15 @@
 	<ol class="breadcrumb panel-heading">
 		<li><a href="{{ route('admin.index') }}">Início</a></li>
 		<li><a href="{{ route('admin.post.imagens', $post->id) }}">Imagens de {{ $post->titulo }}</a></li>
-		<li class="active">Adicionar imagem</li>
+		<li class="active">{{$dados->getTituloPagina()}}</li>
 	</ol>
 
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			Gerenciamento de imagens
+			{{ $dados->getTituloPagina() }}
 		</div>
 		<div class="panel-body">
-			<form enctype="multipart/form-data" method="POST" action="{{ $dados['rotaForm'] }}">
+			<form enctype="multipart/form-data" method="POST" action="{{ $dados->getRotaSubmit() }}">
 		    {{ csrf_field() }}
 				@if(!isset($imagem))
 				<div class="row">
@@ -36,7 +36,8 @@
 					</div>
 				</div>
 
-				@if(($post->imagemDestaque() !== null && $post->imagemDestaque()->id == $imagem->id) || $post->imagemDestaque() === null)
+				@if(($post->imagemDestaque() !== null && isset($imagem) && $post->imagemDestaque()->id == $imagem->id) ||
+																																								$post->imagemDestaque() === null)
 				<div class="row marginTop">
 					<div class="col-xs-3">
 							<strong>Imagem destaque?</strong>
@@ -54,7 +55,7 @@
 
 				<div class="row marginTop">
 					<div class="col-xs-2">
-							<input type="submit" value="{{ $dados['labelSubmmit'] }}" class="btn btn-primary btn-large" />
+							<input type="submit" value="{{ $dados->getLabelBotaoSubmit() }}" class="btn btn-primary btn-large" />
 					</div>
 				</div>
 			</form>

@@ -9,10 +9,14 @@ use App\Http\Requests\ImagemRequest;
 use App\Imagem;
 use App\Post;
 use App\Libs\Alert;
+use App\Libs\DadosView;
+use App\Libs\DadosViewForm;
 use App\Libs\ImagemUtil;
 
 class ImagemController extends Controller
 {
+  const ABA = DadosView::ABA_GERENCIAR_POSTS;
+
   public function __construct(){
     $this->middleware('auth');
   }
@@ -24,11 +28,9 @@ class ImagemController extends Controller
       $post = $imagem->post;
 
       //Dados para o formulário
-      $dados = [
-        'tituloPagina' => 'Alteração de imagem',
-        'rotaForm' => route('admin.atualizar.imagem', $imagem->id),
-        'labelSubmmit' => 'Atualizar'
-      ];
+      $dados = new DadosViewForm('Alterar imagem', self::ABA);
+      $dados->setRotaSubmit(route('admin.atualizar.imagem', $imagem->id));
+      $dados->setLabelBotaoSubmit('Atualizar');
 
       return view('admin.form_img', compact('imagem', 'dados', 'post'));
     } catch (\Exception $e) {
@@ -43,11 +45,9 @@ class ImagemController extends Controller
     try{
       $post = Post::findOrFail($id);
 
-      $dados = [
-        'tituloPagina' => 'Upload de imagem',
-        'rotaForm' => route('admin.salvar.imagem', $id),
-        'labelSubmmit' => 'Enviar'
-      ];
+      $dados = new DadosViewForm('Upload de imagem', self::ABA);
+      $dados->setRotaSubmit(route('admin.salvar.imagem', $id));
+      $dados->setLabelBotaoSubmit('Enviar');
 
       return view('admin.form_img', compact('dados', 'post'));
     } catch(\Exception $e){

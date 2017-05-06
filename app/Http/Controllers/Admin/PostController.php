@@ -9,6 +9,8 @@ use App\Http\Requests\PostRequest;
 use App\Post;
 use App\Categoria;
 use App\Libs\Alert;
+use App\Libs\DadosView;
+use App\Libs\DadosViewForm;
 
 class PostController extends Controller
 {
@@ -21,7 +23,9 @@ class PostController extends Controller
     try{
       $posts = Post::orderBy('dataFantasia', 'desc')->get();
 
-      return view('admin.lista_posts', compact('posts'));
+      $dados = new DadosView('Gerenciar posts', DadosView::ABA_GERENCIAR_POSTS);
+
+      return view('admin.lista_posts', compact('posts', 'dados'));
     } catch (\Exception $e){
       Alert::danger('Falha ao processar a requisição');
       return redirect()->route('admin.index');
@@ -31,10 +35,10 @@ class PostController extends Controller
   //View para cadastrar novo Post
   public function cadastrarPost(){
     try{
-      $dados = [
-        'rota' => route('admin.salvar.post'),
-        'botaoSubmit' => 'Cadastrar'
-      ];
+      $dados = new DadosViewForm('Cadastrar novo Post',
+                  DadosViewForm::ABA_GERENCIAR_POSTS);
+      $dados->setRotaSubmit(route('admin.salvar.post'));
+      $dados->setLabelBotaoSubmit('Cadastrar');
 
       $categorias = Categoria::all();
       return view('admin.form_post', compact(['dados', 'categorias']));
@@ -49,10 +53,10 @@ class PostController extends Controller
     try{
       $post = Post::findOrFail($id);
 
-      $dados = [
-        'rota' => route('admin.atualizar.post', $id),
-        'botaoSubmit' => 'Atualizar'
-      ];
+      $dados = new DadosViewForm('Alterar Post',
+                  DadosViewForm::ABA_GERENCIAR_POSTS);
+      $dados->setRotaSubmit(route('admin.atualizar.post', $id));
+      $dados->setLabelBotaoSubmit('Atualizar');
 
       $categorias = Categoria::orderBy('titulo', 'asc')->get();
       return view('admin.form_post', compact(['dados', 'categorias', 'post']));

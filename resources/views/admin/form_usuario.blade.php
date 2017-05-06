@@ -4,17 +4,17 @@
 <div class="container">
   <ol class="breadcrumb panel-heading">
     <li><a href="{{ route('admin.listar.usuarios') }}">Gerenciar usuários</a></li>
-    <li class="active">Adicionar usuário</li>
+    <li class="active">{{ $dados->getTituloPagina() }}</li>
   </ol>
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
       <div class="panel panel-default">
-        <div class="panel-heading">{{ $dados['tituloForm']}}</div>
+        <div class="panel-heading">{{ $dados->getTituloPagina() }}</div>
         <div class="panel-body">
-          <form class="form-horizontal" role="form" method="POST" action="{{ $dados['rota'] }}">
+          <form class="form-horizontal" role="form" method="POST" action="{{ $dados->getRotaSubmit() }}">
             {{ csrf_field() }}
 
-            @if($dados['modo'] !== 'alterarSenha')
+            @if($dados->getModo() !== 'alterar_senha')
             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
               <label for="name" class="col-md-4 control-label">Login</label>
 
@@ -58,7 +58,7 @@
             </div>
             @endif
 
-            @if(!isset($usuario) || $dados['modo'] === 'alterarSenha')
+            @if(!isset($usuario) || $dados->getModo() === 'alterar_senha')
             <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
               <label for="password" class="col-md-4 control-label">Senha</label>
 
@@ -84,7 +84,7 @@
             <div class="form-group">
               <div class="col-md-6 col-md-offset-4">
                 <button type="submit" class="btn btn-primary">
-                  {{$dados['botaoSubmit']}}
+                  {{ $dados->getLabelBotaoSubmit() }}
                 </button>
               </div>
             </div>

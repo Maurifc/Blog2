@@ -4,7 +4,7 @@
 <div class="container marginTop">
 	<ol class="breadcrumb panel-heading">
 		<li><a href="{{ route('admin.index') }}">Gerenciar posts</a></li>
-		<li class="active">Adicionar post</li>
+		<li class="active">{{ $dados->getTituloPagina() }}</li>
 	</ol>
 	@if(isset($post))
 	<div class="row">
@@ -17,11 +17,11 @@
 	@endif
 <div class="panel panel-default">
 	<div class="panel-heading">
-		Gerenciamento de posts
+		{{ $dados->getTituloPagina() }}
 	</div>
 	<div class="panel-body">
 
-			<form method="POST" action="{{ $dados['rota'] }}">
+			<form method="POST" action="{{ $dados->getRotaSubmit() }}">
 				{{ csrf_field() }}
 				<div class="row">
 					<div class="col-xs-2">
@@ -87,7 +87,7 @@
 
 				<div class="row marginTop">
 					<div class="col-xs-2">
-							<input type="submit" value="{{ $dados['botaoSubmit']}}" class="btn btn-primary btn-large" />
+							<input type="submit" value="{{ $dados->getLabelBotaoSubmit() }}" class="btn btn-primary btn-large" />
 					</div>
 				</div>
 			</form>
