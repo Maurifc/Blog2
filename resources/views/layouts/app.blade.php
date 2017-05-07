@@ -8,7 +8,14 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ $dados->getTituloPagina() }}</title>
+    @php
+      if(isset($dados)){
+        $titulo = $dados->getTituloPagina();
+      } else {
+        $titulo = config('app.name');
+      }
+    @endphp
+    <title>{{ $titulo }}</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">

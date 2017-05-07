@@ -6,12 +6,15 @@ use App\Http\Controllers\Controller;
 use App\Post;
 use App\Categoria;
 use App\Libs\Alert;
+use App\Libs\DadosView;
 use DB;
 use Illuminate\Http\Request;
 
 
 class PostController extends Controller
 {
+  const ABA = DadosView::ABA_BLOG;
+
   //Exibe todos os posts
   public function index(){
     try{
@@ -40,9 +43,7 @@ class PostController extends Controller
 
   //Exibe os posts informados no parametro
   public function mostrar($posts){
-    $dados = [
-      'aba' => 0
-    ];
+    $dados = new DadosView(config('app.name'), self::ABA);
 
     $categorias = Categoria::all();
     return view('blog.inicio', compact(['posts', 'categorias', 'dados']));
@@ -53,8 +54,9 @@ class PostController extends Controller
     try{
       $post = Post::findOrFail($id);
       $categorias = Categoria::all();
+      $dados = new DadosView($post->titulo, self::ABA);
 
-      return view('blog.post', compact(['post', 'categorias']));
+      return view('blog.post', compact(['post', 'categorias', 'dados']));
     } catch (\Exception $e){
       Alert::danger('Falha ao processar a requisição');
       return redirect()->route('post.index');
